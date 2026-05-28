@@ -710,197 +710,229 @@ function pcol(w,items){ return '<div style="display:flex;flex-direction:column;w
    레이아웃: 브랜드개발(1열) | 브랜드공통(1열) | 무신사스탠다드(5열) | 트레이딩(2열)
    루트 → 공통한줄 → 3개 N-2 영역으로 분할 */
 function buildOvTree(d){
-  var BW=34; /* 기본 노드 너비 */
-
-  /* ── 브랜드개발 (1컬럼: 40pt) ── */
-  var DEV_W=40, DEV_BD='#34D399', DEV_BG='#D1FAE5', DEV_TX='#065F46';
-  var DEV_BG2='#ECFDF5', DEV_BD2='#6EE7B7';
-  function devN(d,m,c,w){ return pnb(d==1?DEV_BG:DEV_BG2, d==1?DEV_BD:DEV_BD2, DEV_TX, d,m,c,w||DEV_W); }
-  var devCol = pcol(DEV_W, [
-    devN(1,'브랜드개발','최운식',27,DEV_W),
-    pvl(2),
-    devN(2,'패션브랜드개발','최운식',4,DEV_W), pvl(2),
-    ['이소민','윤이담','류지민'].map(function(n){return pmbr(DEV_BD2,n);}).join(''),
-    psep(),
-    devN(2,'우먼즈패션개발','나하늘',12,DEV_W), pvl(2),
-    ['안나연','김주연','강민지','박태이','조주원','홍서연','손수지','박희영','이수정','문혜빈','박지수'].map(function(n){return pmbr(DEV_BD2,n);}).join(''),
-    psep(),
-    devN(2,'캐주얼패션개발','염하나',10,DEV_W), pvl(2),
-    ['박수민','이우진','황인선','조우영','홍민경','손유주','최지영','신세연','이민지'].map(function(n){return pmbr(DEV_BD2,n);}).join(''),
-    psep(),
-    devN(2,'소싱','임서경',3,DEV_W), pvl(2),
-    ['안유진','이하은'].map(function(n){return pmbr(DEV_BD2,n);}).join(''),
-  ]);
-
-  /* ── 브랜드 공통 (1컬럼: 38pt) ── */
-  var CMN_W=38, CMN_BD='#C8C5BE', CMN_BG='#F3F2EE', CMN_TX='#444';
-  var cmn = pcol(CMN_W, [
-    pnb(CMN_BG,CMN_BD,CMN_TX,'브랜드 공통','',0,CMN_W),
-    pvl(2),
-    pnb(CMN_BG,CMN_BD,CMN_TX,'오프라인세일즈','김유성',1,CMN_W),
-    pvl(1),
-    pnb(CMN_BG,CMN_BD,CMN_TX,'전략&데이터','김준원',4,CMN_W), pvl(1),
-    ['이진아','문수영','정다움'].map(function(n){return pmbr(CMN_BD,n);}).join(''),
-    pvl(1),
-    pnb(CMN_BG,CMN_BD,CMN_TX,'브랜드Staff','',3,CMN_W), pvl(1),
-    ['박현상','채명진','김현규'].map(function(n){return pmbr(CMN_BD,n);}).join(''),
-  ]);
-
-  /* ── 무신사스탠다드 (5컬럼) ── */
-  var SW=32, SBG='#DBEAFE', SBD='#60A5FA', STX='#1E40AF', SBG2='#EFF6FF', SBD2='#93C5FD', SBG3='#F8FBFF';
-  function sN(d,m,c,w){ return pnb(d==1?SBG:d==2?SBG2:SBG3, d==1?SBD:SBD2, STX, d,m,c,w||SW); }
-
-  /* IMC 하위 */
-  var imcMembers=['김민용','조소미','안수빈','임다은','장하빈','박지윤','권송현','CX:권정은','우아영','박수빈','김하영'];
-  /* 콘텐츠 마케팅 하위 */
-  var cntMembers=['이화진','조예나','지선영','박소서','정도영','김초은','조영찬','성다은','최수영','이인직','노수진','최수연','김훈미','박채윤','이서빈','김애영','이도윤'];
-  /* 오프라인사업 하위 */
-  var offlMembers=['심혁(상품컨트롤)','홍수인','박대영','두현진','김성은','최종민','정소이','박기홍','김채린(VMD)','김경주','박상건','김채하','김지유','박종우','신지수','서민정','최원경','선진영(겸)(리테일)','전루미','양승현','조승현','최경민','강영석','손동현','정승이'];
-
-  var sCol1 = pcol(SW, [
-    sN(1,'기획MD','김병관',8),pvl(2),
-    ['황서영','손정권','김다슬','박은진','허소영','이인하','장유정'].map(function(n){return pmbr(SBD2,n);}).join(''),
-    psep(),
-    sN(1,'소싱','윤정민',13),pvl(2),
-    ['최호림','엄기훈','장인영','김지성','서은진','김민수'].map(function(n){return pmbr(SBD2,n);}).join(''),
-    sN(2,'우븐','조우현',6),pvl(1),
-    ['박용수','민병국','이상엽','염승윤','최희연'].map(function(n){return pmbr(SBD2,n);}).join(''),
-  ]);
-
-  var sCol2 = pcol(SW, [
-    sN(1,'디자인','이건오',37),pvl(2),
-    ['박지은','엄수민','김수빈'].map(function(n){return pmbr(SBD2,n);}).join(''),
-    sN(2,'맨즈디자인','김지훈',14),pvl(1),
-    ['김지용','염진아','이지수','정진우','홍유석','신재호','박인호','우윤구','최지완','신윤주','정주연','유희경','김도형'].map(function(n){return pmbr(SBD2,n);}).join(''),
-  ]);
-
-  var sCol3 = pcol(SW, [
-    '<div style="height:14pt;"></div>', /* 디자인 헤더 높이 맞춤 */
-    sN(2,'우먼즈디자인','임혜진',10),pvl(1),
-    ['김빛한올','정희선','송호연','한지연','이예진','강현정','이성욱','이혜린','김효영'].map(function(n){return pmbr(SBD2,n);}).join(''),
-    sN(2,'키즈디자인','임유진',4),pvl(1),
-    ['정보희','김은지','박예진'].map(function(n){return pmbr(SBD2,n);}).join(''),
-    sN(2,'테크니컬디자인','박영희',5),pvl(1),
-    ['임명섭','김유진','조희진','김남수'].map(function(n){return pmbr(SBD2,n);}).join(''),
-  ]);
-
-  var sCol4 = pcol(SW, [
-    sN(1,'무신사스탠다드마케팅','오기현',30),pvl(2),
-    sN(2,'IMC마케팅','김하연',12),pvl(1),
-    imcMembers.map(function(n){return pmbr(SBD2,n);}).join(''),
-    sN(2,'콘텐츠마케팅','오기현(겸)',17),pvl(1),
-    cntMembers.map(function(n){return pmbr(SBD2,n);}).join(''),
-  ]);
-
-  var sCol5 = pcol(SW, [
-    sN(1,'오프라인사업','선진영',25),pvl(2),
-    offlMembers.map(function(n){return pmbr(SBD,n);}).join(''),
-    psep(),
-    sN(1,'온라인사업','김민수',11),pvl(2),
-    ['강혜리','이정훈'].map(function(n){return pmbr(SBD2,n);}).join(''),
-    sN(2,'온라인MD','김현',8),pvl(1),
-    ['유다휘','배규태','정채은','신명철','이지현','한상은','정지형'].map(function(n){return pmbr(SBD2,n);}).join(''),
-    psep(),
-    sN(1,'무신사스탠다드홈','박영민',6),pvl(1),
-    ['이현우','박대선','민준기','문영우','정은실'].map(function(n){return pmbr(SBD,n);}).join(''),
-    psep(),
-    '<div style="display:flex;gap:1pt;">'+
-      pnb(SBG2,SBD2,STX,'키즈TF','구본용',3,SW/2-0.5)+'<div style="width:0.5pt;"></div>'+
-      pnb(SBG2,SBD2,STX,'ACC TF','장세미',2,SW/2-0.5)+
-    '</div>',
-    pvl(1),
-    sN(2,'언더웨어TF','강문영',1,SW),
-  ]);
-
-  /* ── 트레이딩 (2컬럼: 각 40pt) ── */
-  var TW=40, TBG='#FEF3C7', TBD='#FBBF24', TTX='#78350F', TBG2='#FFFBEB', TBD2='#FDE68A', TBG3='#FFFDF5';
-  function tN(d,m,c,w){ return pnb(d==1?TBG:d==2?TBG2:TBG3, d==1?TBD:TBD2, TTX, d,m,c,w||TW); }
-
-  var tCol1 = pcol(TW, [
-    tN(1,'브랜드1','손영일',47),pvl(2),
-    tN(2,'브랜드기획','모승환',12),pvl(1),
-    tN(3,'브랜드기획1','모승환(겸)',6,TW),pvl(1),
-    ['박반석','이규학','이지언','박원','박준혁','김소윤'].map(function(n){return pmbr(TBD2,n);}).join(''),
-    tN(3,'브랜드기획2','이선희',5,TW),pvl(1),
-    ['이서형','한호희','권수민','김하영'].map(function(n){return pmbr(TBD2,n);}).join(''),
-    psep(),
-    tN(2,'브랜드리테일','신우철',18),pvl(1),
-    pmbr(TBD2,'이덕진'),
-    tN(3,'오프라인리테일','신우철(겸)',4,TW),pvl(1),
-    ['정용휘','안혜림','이헌석','권기원'].map(function(n){return pmbr(TBD2,n);}).join(''),
-    tN(3,'온라인리테일','신우철(겸)',7,TW),pvl(1),
-    ['정하나','정하윤','이신혜','장지은','김형균','조혜정','이윤재'].map(function(n){return pmbr(TBD2,n);}).join(''),
-    tN(3,'리테일기획','유혜란',5,TW),pvl(1),
-    ['김윤','정영현','강혜인','정민종'].map(function(n){return pmbr(TBD2,n);}).join(''),
-    psep(),
-    tN(2,'프로덕트사업','김성준',11),pvl(1),
-    ['함지연','신민정','문환웅','황민순','박소현','김진영','이다솜','박천교','김연빈','정지원'].map(function(n){return pmbr(TBD2,n);}).join(''),
-    psep(),
-    tN(2,'트레이딩마케팅','',5), pvl(1),
-    ['김민지','최유정','탁피어남','최효선','김유진'].map(function(n){return pmbr(TBD2,n);}).join(''),
-  ]);
-
-  var tCol2 = pcol(TW, [
-    tN(1,'브랜드2','성명수',21),pvl(2),
-    ['이동협','연제명','김영주','김민경','박예인','정민아','홍소영','이효주','박소현'].map(function(n){return pmbr(TBD,n);}).join(''),
-    tN(2,'멀티브랜드개발','채경락',4),pvl(1),
-    ['이상원','박지혜','한경범'].map(function(n){return pmbr(TBD2,n);}).join(''),
-    tN(2,'모노브랜드개발','김건형',7),pvl(1),
-    ['정혜민','고주은','이의재','김수연','이소미','조승우'].map(function(n){return pmbr(TBD2,n);}).join(''),
-    psep(),
-    tN(1,'콘텐츠','박은경',15),pvl(2),
-    tN(2,'트레이딩VMD','박은경(겸)',4),pvl(1),
-    ['박현이','윤정원','김준섭','안세린'].map(function(n){return pmbr(TBD2,n);}).join(''),
-    tN(2,'BX디자인','최현균',5),pvl(1),
-    ['김소민','문누리','방서연','김소민'].map(function(n){return pmbr(TBD2,n);}).join(''),
-    tN(2,'촬영','고윤성',5),pvl(1),
-    ['이경윤','강창구','김현중','선유이'].map(function(n){return pmbr(TBD2,n);}).join(''),
-    psep(),
-    tN(1,'트레이딩 운영지원','김지호',28),pvl(2),
-    tN(2,'물류','강상원',7),pvl(1),
-    ['박수빈','이선민','김주영','정현욱','정혜인','박슬기'].map(function(n){return pmbr(TBD2,n);}).join(''),
-    tN(2,'CS','김지호(겸)',10),pvl(1),
-    tN(3,'상품운영','',4,TW),pvl(1),
-    ['김나연','김효진','유승미','이은영'].map(function(n){return pmbr(TBD2,n);}).join(''),
-    tN(3,'CS','',6,TW),pvl(1),
-    ['김효민','김방현','권순영','이주섭','이애리','심원희'].map(function(n){return pmbr(TBD2,n);}).join(''),
-    psep(),
-    pmbr(TBD,'권지훈 (직속)'),
-  ]);
-
-  /* ── 루트 헤더 ── */
-  var totalCnt=d.total_active;
-  var rootBox='<div style="background:#111;border:1pt solid #111;border-radius:3pt;padding:2.5pt 4pt;display:inline-flex;align-items:center;gap:6pt;margin-bottom:2pt;">'
-    +'<span style="font-size:7pt;font-weight:700;color:#fff;">무신사 브랜드</span>'
-    +'<span style="font-size:5.5pt;font-weight:600;color:#fff;background:rgba(255,255,255,0.2);border-radius:2pt;padding:0 3pt;">최운식 · 재직 '+totalCnt+'명</span>'
-    +'</div>';
-
-  /* N-2 헤더 라벨 */
-  function secHead(label,cnt,bg,tx){
-    return '<div style="background:'+bg+';border-radius:3pt;padding:1.5pt 5pt;margin-bottom:1.5pt;display:flex;justify-content:space-between;align-items:center;">'
-      +'<span style="font-size:6pt;font-weight:700;color:'+tx+';">'+label+'</span>'
-      +'<span style="font-size:5pt;color:'+tx+';">'+cnt+'명</span></div>';
+  /* A5 인쇄용 전체 조직도
+     - 구성원 이름 없음
+     - 조직명 + 매니저 + 인원수만
+     - 순서: 브랜드(루트) → 공통부서 → 무신사스탠다드 → 브랜드개발 → 트레이딩
+     - N-5 조직까지 트리 구조로 표시
+  */
+  function nb(bg,bd,tx,dept,mgr,cnt,w){
+    var cH=cnt>0?'<span style="font-size:4pt;font-weight:600;padding:0 2pt;border-radius:2pt;color:#fff;background:'+bd+';">'+cnt+'명</span>':'';
+    return '<div style="background:'+bg+';border:0.7pt solid '+bd+';border-radius:2.5pt;'
+      +'padding:2pt 3pt;width:'+w+'pt;box-sizing:border-box;flex-shrink:0;">'
+      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.8pt;">'
+      +'<span style="font-size:5pt;font-weight:700;color:'+tx+';line-height:1.2;flex:1;">'+dept+'</span>'+cH+'</div>'
+      +'<div style="font-size:4pt;color:'+tx+';">'+mgr+'</div>'
+      +'</div>';
   }
+  function vl(h){ return '<div style="width:0.5pt;height:'+h+'pt;background:#C0BDB6;margin:0 auto;"></div>'; }
+  function hl(w){ return '<div style="height:0.5pt;width:'+w+'pt;background:#C0BDB6;"></div>'; }
+  function hrow(items,gap){ return '<div style="display:flex;align-items:flex-start;gap:'+gap+'pt;">'+items.join('')+'</div>'; }
+  function vcol(items){ return '<div style="display:flex;flex-direction:column;align-items:center;">'+items.join('')+'</div>'; }
+  function sep(){ return '<div style="height:2pt;"></div>'; }
 
-  return rootBox
-    +'<div style="display:flex;gap:2pt;align-items:flex-start;width:100%;">'
-    +'<div style="display:flex;flex-direction:column;width:'+DEV_W+'pt;">'
-      +secHead('브랜드개발',27,'#D1FAE5','#065F46')+devCol+'</div>'
-    +pvsep()
-    +'<div style="display:flex;flex-direction:column;width:'+CMN_W+'pt;">'
-      +secHead('브랜드 공통','','#F3F2EE','#444')+cmn+'</div>'
-    +pvsep()
-    +'<div style="display:flex;flex-direction:column;">'
-      +secHead('무신사스탠다드',138,'#DBEAFE','#1E40AF')
-      +'<div style="display:flex;gap:2pt;">'+sCol1+pvsep()+sCol2+pvsep()+sCol3+pvsep()+sCol4+pvsep()+sCol5+'</div></div>'
-    +pvsep()
-    +'<div style="display:flex;flex-direction:column;">'
-      +secHead('트레이딩',112,'#FEF3C7','#78350F')
-      +'<div style="display:flex;gap:2pt;">'+tCol1+pvsep()+tCol2+'</div></div>'
+  /* 색상 팔레트 */
+  var C={
+    root:{bg:'#111',bd:'#111',tx:'#fff'},
+    cmn: {bg:'#F3F2EE',bd:'#C8C5BE',tx:'#444',bg2:'#FAFAF8',bd2:'#D1CEC8'},
+    std: {bg:'#DBEAFE',bd:'#60A5FA',tx:'#1E40AF',bg2:'#EFF6FF',bd2:'#93C5FD',bg3:'#F8FBFF',bd3:'#BFDBFE'},
+    dev: {bg:'#D1FAE5',bd:'#34D399',tx:'#065F46',bg2:'#ECFDF5',bd2:'#6EE7B7',bg3:'#F5FFFD',bd3:'#A7F3D0'},
+    trd: {bg:'#FEF3C7',bd:'#FBBF24',tx:'#78350F',bg2:'#FFFBEB',bd2:'#FDE68A',bg3:'#FFFDF5',bd3:'#FEF08A'},
+  };
+
+  var W0=56,W1=44,W2=36,W3=30,W4=26;
+
+  /* ── 루트 ── */
+  var rootBox=nb(C.root.bg,C.root.bd,C.root.tx,'브랜드','최운식',d.total_active,W0);
+
+  /* ── 공통부서 (가로 1줄) ── */
+  var commonRow=hrow([
+    nb(C.cmn.bg,C.cmn.bd,C.cmn.tx,'오프라인세일즈','김유성',1,W1),
+    nb(C.cmn.bg,C.cmn.bd,C.cmn.tx,'전략&amp;데이터','김준원',4,W1),
+    nb(C.cmn.bg,C.cmn.bd,C.cmn.tx,'브랜드 Staff','박현상·채명진·김현규',3,W1),
+  ],4);
+
+  /* ── 무신사스탠다드 ── */
+  /* N-3 디자인 하위: 4개 조직 2열 */
+  var designSubs=hrow([
+    vcol([nb(C.std.bg3,C.std.bd3,C.std.tx,'맨즈디자인','김지훈',14,W3),
+          nb(C.std.bg3,C.std.bd3,C.std.tx,'우먼즈디자인','임혜진',10,W3)]),
+    vcol([nb(C.std.bg3,C.std.bd3,C.std.tx,'키즈디자인','임유진',4,W3),
+          nb(C.std.bg3,C.std.bd3,C.std.tx,'테크니컬디자인','박영희',5,W3)]),
+  ],2);
+
+  /* N-3 마케팅 하위 */
+  var mktSubs=hrow([
+    vcol([nb(C.std.bg3,C.std.bd3,C.std.tx,'IMC마케팅','김하연',12,W3),
+          nb(C.std.bg3,C.std.bd3,C.std.tx,'CX마케팅','권정은',4,W3)]),
+    vcol([nb(C.std.bg3,C.std.bd3,C.std.tx,'콘텐츠마케팅','오기현(겸)',17,W3)]),
+  ],2);
+
+  /* N-3 오프라인사업 하위 */
+  var offSubs=hrow([
+    nb(C.std.bg3,C.std.bd3,C.std.tx,'상품컨트롤','심혁',8,W3),
+    nb(C.std.bg3,C.std.bd3,C.std.tx,'VMD','김채린',9,W3),
+    nb(C.std.bg3,C.std.bd3,C.std.tx,'리테일','선진영(겸)',7,W3),
+  ],2);
+
+  /* N-3 온라인사업 하위 */
+  var onlSubs=hrow([nb(C.std.bg3,C.std.bd3,C.std.tx,'온라인MD','김현',8,W3)],0);
+
+  /* 무신사스탠다드 컬럼 구성 */
+  var stdCols=hrow([
+    /* Col A: 기획MD + 소싱(우븐) */
+    vcol([
+      nb(C.std.bg2,C.std.bd2,C.std.tx,'기획MD','김병관',8,W2),
+      sep(),
+      nb(C.std.bg2,C.std.bd2,C.std.tx,'소싱','윤정민',13,W2),
+      vl(2),nb(C.std.bg3,C.std.bd3,C.std.tx,'우븐','조우현',6,W2),
+    ]),
+    /* Col B: 디자인(2열) */
+    vcol([
+      nb(C.std.bg2,C.std.bd2,C.std.tx,'디자인','이건오',37,W3*2+4),
+      vl(2),designSubs,
+    ]),
+    /* Col C: 마케팅(2열) */
+    vcol([
+      nb(C.std.bg2,C.std.bd2,C.std.tx,'무신사스탠다드마케팅','오기현',30,W3*2+4),
+      vl(2),mktSubs,
+    ]),
+    /* Col D: 오프라인사업 + 온라인사업 */
+    vcol([
+      nb(C.std.bg2,C.std.bd2,C.std.tx,'오프라인사업','선진영',25,W3*3+8),
+      vl(2),offSubs,
+      sep(),
+      nb(C.std.bg2,C.std.bd2,C.std.tx,'온라인사업','김민수',11,W3*3+8),
+      vl(2),onlSubs,
+    ]),
+    /* Col E: 홈+TF 세로 1줄 */
+    vcol([
+      nb(C.std.bg2,C.std.bd2,C.std.tx,'무신사스탠다드홈','박영민',6,W2),
+      sep(),
+      nb(C.std.bg2,C.std.bd2,C.std.tx,'키즈TF','구본용',3,W2),
+      sep(),
+      nb(C.std.bg2,C.std.bd2,C.std.tx,'ACC TF','장세미',2,W2),
+      sep(),
+      nb(C.std.bg2,C.std.bd2,C.std.tx,'언더웨어TF','강문영',1,W2),
+    ]),
+  ],3);
+
+  var stdSection=
+    '<div style="display:flex;flex-direction:column;">'
+    +'<div style="background:#DBEAFE;border:0.7pt solid #60A5FA;border-radius:2.5pt;padding:2pt 4pt;margin-bottom:2pt;display:flex;justify-content:space-between;">'
+    +'<span style="font-size:5.5pt;font-weight:700;color:#1E40AF;">무신사스탠다드</span>'
+    +'<span style="font-size:4.5pt;color:#1E40AF;">재직 138명 · 최운식(겸)</span></div>'
+    +stdCols+'</div>';
+
+  /* ── 브랜드개발 ── */
+  var devSection=
+    '<div style="display:flex;flex-direction:column;">'
+    +'<div style="background:#D1FAE5;border:0.7pt solid #34D399;border-radius:2.5pt;padding:2pt 4pt;margin-bottom:2pt;display:flex;justify-content:space-between;">'
+    +'<span style="font-size:5.5pt;font-weight:700;color:#065F46;">브랜드개발</span>'
+    +'<span style="font-size:4.5pt;color:#065F46;">재직 27명 · 최운식(겸)</span></div>'
+    +hrow([
+      vcol([
+        nb(C.dev.bg2,C.dev.bd2,C.dev.tx,'패션브랜드개발','최운식(겸)',4,W2),
+      ]),
+      vcol([
+        nb(C.dev.bg2,C.dev.bd2,C.dev.tx,'우먼즈패션개발','나하늘',12,W2),
+      ]),
+      vcol([
+        nb(C.dev.bg2,C.dev.bd2,C.dev.tx,'캐주얼패션개발','염하나',10,W2),
+      ]),
+      vcol([
+        nb(C.dev.bg2,C.dev.bd2,C.dev.tx,'소싱','임서경',3,W2),
+      ]),
+    ],4)
     +'</div>';
+
+  /* ── 트레이딩 ── */
+  /* 브랜드1 하위 */
+  var b1Subs=hrow([
+    vcol([
+      nb(C.trd.bg3,C.trd.bd3,C.trd.tx,'브랜드기획','모승환',12,W3),
+      vl(2),
+      hrow([
+        nb(C.trd.bg3,C.trd.bd3,C.trd.tx,'기획1','모승환(겸)',6,W4),
+        nb(C.trd.bg3,C.trd.bd3,C.trd.tx,'기획2','이선희',5,W4),
+      ],2),
+    ]),
+    vcol([
+      nb(C.trd.bg3,C.trd.bd3,C.trd.tx,'브랜드리테일','신우철',18,W3),
+      vl(2),
+      hrow([
+        nb(C.trd.bg3,C.trd.bd3,C.trd.tx,'오프라인리테일','신우철(겸)',4,W4),
+        nb(C.trd.bg3,C.trd.bd3,C.trd.tx,'온라인리테일','신우철(겸)',7,W4),
+        nb(C.trd.bg3,C.trd.bd3,C.trd.tx,'리테일기획','유혜란',5,W4),
+      ],2),
+    ]),
+    vcol([
+      nb(C.trd.bg3,C.trd.bd3,C.trd.tx,'프로덕트사업','김성준',11,W3),
+    ]),
+    vcol([
+      nb(C.trd.bg3,C.trd.bd3,C.trd.tx,'트레이딩마케팅','',5,W3),
+    ]),
+  ],3);
+
+  /* 브랜드2 하위 */
+  var b2Subs=hrow([
+    nb(C.trd.bg3,C.trd.bd3,C.trd.tx,'멀티브랜드개발','채경락',4,W3),
+    nb(C.trd.bg3,C.trd.bd3,C.trd.tx,'모노브랜드개발','김건형',7,W3),
+  ],2);
+
+  /* 콘텐츠 하위 */
+  var cntSubs=hrow([
+    nb(C.trd.bg3,C.trd.bd3,C.trd.tx,'트레이딩VMD','박은경(겸)',4,W3),
+    nb(C.trd.bg3,C.trd.bd3,C.trd.tx,'BX디자인','최현균',5,W3),
+    nb(C.trd.bg3,C.trd.bd3,C.trd.tx,'촬영','고윤성',5,W3),
+  ],2);
+
+  /* 운영지원 하위 */
+  var opsSubs=hrow([
+    nb(C.trd.bg3,C.trd.bd3,C.trd.tx,'물류','강상원',7,W3),
+    nb(C.trd.bg3,C.trd.bd3,C.trd.tx,'CS','김지호(겸)',10,W3),
+  ],2);
+
+  var trdCols=hrow([
+    vcol([
+      nb(C.trd.bg2,C.trd.bd2,C.trd.tx,'브랜드1','손영일',47,W2*3+12),
+      vl(2),b1Subs,
+    ]),
+    vcol([
+      nb(C.trd.bg2,C.trd.bd2,C.trd.tx,'브랜드2','성명수',21,W2),
+      vl(2),b2Subs,
+    ]),
+    vcol([
+      nb(C.trd.bg2,C.trd.bd2,C.trd.tx,'콘텐츠','박은경',15,W2),
+      vl(2),cntSubs,
+    ]),
+    vcol([
+      nb(C.trd.bg2,C.trd.bd2,C.trd.tx,'트레이딩 운영지원','김지호',28,W2),
+      vl(2),opsSubs,
+    ]),
+  ],4);
+
+  var trdSection=
+    '<div style="display:flex;flex-direction:column;">'
+    +'<div style="background:#FEF3C7;border:0.7pt solid #FBBF24;border-radius:2.5pt;padding:2pt 4pt;margin-bottom:2pt;display:flex;justify-content:space-between;">'
+    +'<span style="font-size:5.5pt;font-weight:700;color:#78350F;">트레이딩</span>'
+    +'<span style="font-size:4.5pt;color:#78350F;">재직 112명 · 최운식(겸)</span></div>'
+    +trdCols+'</div>';
+
+  /* ── 전체 레이아웃 ── */
+  return vcol([
+    rootBox,
+    vl(4),
+    commonRow,
+    vl(4),
+    stdSection,
+    vl(3),
+    devSection,
+    vl(3),
+    trdSection,
+  ]);
 }
 
-/* ─ 2. 변동현황 + 휴직자 ─ */
 function buildOvChange(d){
   if(!d.changes)return '<p style="color:#aaa;font-size:8pt;">변동현황 없음</p>';
   var types=[

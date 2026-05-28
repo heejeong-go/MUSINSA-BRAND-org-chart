@@ -188,8 +188,77 @@ body{font-family:'Noto Sans KR',sans-serif;background:#EDEBE6;min-height:100vh;}
   border:none; border-radius:6px; font-size:12px; font-weight:500; cursor:pointer;
   font-family:'Noto Sans KR',sans-serif; }
 .print-execute:hover { background:#333; }
+
+
+@media print {
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  body { background: #fff !important; }
+  .page-header,.view-tabs,.n1-bar,.legend-bar,.hint-bar,.back-btn,
+  .hc-controls,.hc-memo-popup,.print-btn-wrap { display: none !important; }
+  @page { size: 210mm 148mm; margin: 6mm 7mm; }
+  #overview-view,#detail-view,#hc-view { display: none !important; }
+  #print-container { display: block !important; }
+  .pp { width:196mm; height:136mm; overflow:hidden; page-break-after:always; background:#fff; position:relative; }
+  .pp:last-child { page-break-after:auto; }
+  .phd { display:flex !important; align-items:baseline; justify-content:space-between;
+    border-bottom:1pt solid #111; padding-bottom:2mm; margin-bottom:2mm; }
+  .phd h2 { font-size:9pt; font-weight:700; color:#111; }
+  .phd span { font-size:7pt; color:#666; }
+  /* 인쇄 노드 공통 */
+  .pnb { border-radius:2.5pt; padding:2pt 3pt; box-sizing:border-box; border-style:solid; border-width:0.8pt; }
+  .pnb-d { font-size:5pt; font-weight:700; line-height:1.2; }
+  .pnb-n { font-size:4.5pt; }
+  .pnb-c { font-size:4pt; font-weight:600; padding:0 2pt; border-radius:2pt; color:#fff; }
+  .pmbr { display:flex; align-items:center; padding:0.8pt 3pt 0.8pt 4pt;
+    border-left:1.5pt solid; background:#fff; border-radius:0 2pt 2pt 0; margin-bottom:0.5pt; }
+  .pmbr span { font-size:4.2pt; font-weight:600; color:#111; }
+  .pvl { width:0.5pt; background:#C0BDB6; margin:0 auto; }
+  .psep { height:2pt; }
+  .pvsep { width:0.5pt; background:#E5E3DE; align-self:stretch; flex-shrink:0; }
+  /* 변동현황 인쇄 */
+  .pchg-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:2mm; }
+  .pchg-col { border:0.5pt solid #E8E5DF; border-radius:3pt; overflow:hidden; }
+  .pchg-head { padding:2pt 5pt; font-size:6pt; font-weight:600; }
+  .pchg-cnt { font-size:13pt; font-weight:700; padding:1pt 5pt 2pt; line-height:1; }
+  .pchg-n2h { font-size:5pt; font-weight:700; padding:1.5pt 5pt; border-top:0.5pt solid #F0EEE9; }
+  .pchg-item { font-size:5pt; padding:0.5pt 5pt; border-top:0.5pt solid #F8F7F5; display:flex; gap:2pt; }
+  /* 휴직자 인쇄 */
+  .plv-grid { display:flex; flex-wrap:wrap; gap:2mm; }
+  .plv-card { border:0.5pt solid #FDE68A; border-left:2pt solid #F59E0B;
+    border-radius:3pt; padding:2.5pt 5pt; background:#FFFBEB; }
+  .plv-n2 { font-size:5pt; font-weight:700; margin-bottom:0.5pt; }
+  .plv-dept { font-size:5pt; color:#92400E; margin-bottom:0.5pt; }
+  .plv-name { font-size:6pt; font-weight:600; }
+  .plv-period { font-size:5pt; color:#78350F; }
+  /* HC 테이블 */
+  .phc-tbl { width:100%; border-collapse:collapse; }
+  .phc-tbl th { background:#F8F7F4; padding:2pt 3pt; text-align:center; color:#555;
+    font-weight:600; border:0.5pt solid #E0DDD6; white-space:nowrap; font-size:5pt; }
+  .phc-tbl th:first-child { text-align:left; }
+  .phc-tbl td { padding:2pt 3pt; border:0.5pt solid #F0EEE9; text-align:center; font-size:5pt; }
+  .phc-tbl td:first-child { text-align:left; }
+}
+.print-btn-wrap { position:fixed; bottom:20px; right:20px; z-index:300; }
+.print-btn { background:#111; color:#fff; border:none; border-radius:8px; padding:10px 18px;
+  font-size:13px; font-weight:500; cursor:pointer; font-family:'Noto Sans KR',sans-serif;
+  display:flex; align-items:center; gap:6px; box-shadow:0 2px 12px rgba(0,0,0,0.2); }
+.print-btn:hover { background:#333; }
+.print-panel { display:none; position:fixed; bottom:56px; right:20px; z-index:300;
+  background:#fff; border:1px solid #E0DDD6; border-radius:10px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.15); padding:12px; min-width:230px; }
+.print-panel.open { display:block; }
+.print-panel-title { font-size:12px; font-weight:600; color:#333; margin-bottom:8px;
+  padding-bottom:6px; border-bottom:1px solid #F0EEE9; }
+.print-item { display:flex; align-items:center; gap:8px; padding:5px 4px;
+  font-size:12px; color:#444; cursor:pointer; border-radius:5px; }
+.print-item:hover { background:#F8F7F4; }
+.print-item input[type=checkbox] { accent-color:#111; cursor:pointer; }
+.print-execute { width:100%; margin-top:10px; padding:8px; background:#111; color:#fff;
+  border:none; border-radius:6px; font-size:12px; font-weight:500; cursor:pointer;
+  font-family:'Noto Sans KR',sans-serif; }
+.print-execute:hover { background:#333; }
 #print-container { display:none; }
-.print-hd { display:none; }
+.phd { display:none; }
 
 </style>
 </head>
@@ -613,503 +682,450 @@ function drawHCChart(org){
 }
 window.addEventListener('resize',()=>{if(document.getElementById('hc-view').classList.contains('active'))renderHC();});
 
+
 function togglePrintPanel(){
   document.getElementById('print-panel').classList.toggle('open');
 }
-document.addEventListener('click', function(e){
-  var p=document.getElementById('print-panel'), b=document.querySelector('.print-btn');
-  if(p&&b&&!p.contains(e.target)&&!b.contains(e.target)) p.classList.remove('open');
+document.addEventListener('click',function(e){
+  var p=document.getElementById('print-panel'),b=document.querySelector('.print-btn');
+  if(p&&b&&!p.contains(e.target)&&!b.contains(e.target))p.classList.remove('open');
 });
 
-/* ─── 헬퍼 ─── */
-function pnb(bg,bd,tx,dept,name,cnt,w,extra){
-  var cntH = cnt!=null ? '<span style="font-size:4pt;font-weight:600;padding:0 2pt;border-radius:2pt;color:#fff;background:'+bd+';">'+cnt+'</span>' : '';
-  return '<div style="background:'+bg+';border:0.8pt solid '+bd+';border-radius:2.5pt;padding:2pt 3pt;width:'+w+'pt;box-sizing:border-box;'+(extra||'')+'">'
-       + '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.5pt;">'
-       + '<span style="font-size:5pt;font-weight:700;color:'+tx+';line-height:1.2;">'+dept+'</span>'+cntH+'</div>'
-       + '<div style="font-size:4.5pt;color:'+tx+';">'+name+'</div></div>';
+/* ─ 공통 헬퍼 ─ */
+function pnb(bg,bd,tx,dept,mgr,cnt,w){
+  var ch=cnt>0?'<span class="pnb-c" style="background:'+bd+';">'+cnt+'</span>':'';
+  return '<div class="pnb" style="background:'+bg+';border-color:'+bd+';width:'+w+'pt;">'
+    +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.5pt;">'
+    +'<span class="pnb-d" style="color:'+tx+';">'+dept+'</span>'+ch+'</div>'
+    +'<div class="pnb-n" style="color:'+tx+';">'+mgr+'</div></div>';
 }
 function pmbr(bd,name){
-  return '<div style="display:flex;align-items:center;padding:1pt 3pt;border-left:1.5pt solid '+bd+';background:#fff;border-radius:0 2pt 2pt 0;margin-bottom:0.5pt;">'
-       + '<span style="font-size:4.5pt;font-weight:600;color:#111;">'+name+'</span></div>';
+  return '<div class="pmbr" style="border-left-color:'+bd+';"><span>'+name+'</span></div>';
 }
-function pvl(h){ return '<div style="width:0.5pt;height:'+h+'pt;background:#C0BDB6;margin:0 auto;"></div>'; }
-function psep(){ return '<div style="height:2pt;"></div>'; }
-function pvsep(){ return '<div style="width:0.5pt;min-height:180pt;background:#E5E3DE;align-self:stretch;flex-shrink:0;"></div>'; }
+function pvl(h){ return '<div class="pvl" style="height:'+h+'pt;"></div>'; }
+function psep(){ return '<div class="psep"></div>'; }
+function pvsep(){ return '<div class="pvsep"></div>'; }
+function pcol(w,items){ return '<div style="display:flex;flex-direction:column;width:'+w+'pt;">'+items.join('')+'</div>'; }
 
-/* ─── 1. Overview 트리 ─── */
-function buildPrintTree(allData, month){
-  var d=allData[month];
-  var stdD=Object.values(d.detail_data).find(function(v){return v.dept==='무신사스탠다드';});
-  var devD=Object.values(d.detail_data).find(function(v){return v.dept==='브랜드개발';});
-  var trdD=Object.values(d.detail_data).find(function(v){return v.dept==='트레이딩';});
-  var stdCnt=stdD?stdD.cnt:138, devCnt=devD?devD.cnt:27, trdCnt=trdD?trdD.cnt:102;
-  var W=60, SW=28, V=4;
+/* ─ 1. Overview 전체 조직도 ─
+   A5 가로 196mm = ~556pt
+   레이아웃: 브랜드개발(1열) | 브랜드공통(1열) | 무신사스탠다드(5열) | 트레이딩(2열)
+   루트 → 공통한줄 → 3개 N-2 영역으로 분할 */
+function buildOvTree(d){
+  var BW=34; /* 기본 노드 너비 */
 
-  var common = '<div style="display:flex;gap:4pt;align-items:flex-start;">'
-    + pnb('#F3F2EE','#C8C5BE','#555','오프라인세일즈','김유성',1,W,'')
-    + pnb('#F3F2EE','#C8C5BE','#555','전략&amp;데이터','김준원 외 3',4,W,'')
-    + pnb('#F3F2EE','#C8C5BE','#555','브랜드 Staff','박현상·채명진·김현규',3,W,'')
-    + '</div>';
+  /* ── 브랜드개발 (1컬럼: 40pt) ── */
+  var DEV_W=40, DEV_BD='#34D399', DEV_BG='#D1FAE5', DEV_TX='#065F46';
+  var DEV_BG2='#ECFDF5', DEV_BD2='#6EE7B7';
+  function devN(d,m,c,w){ return pnb(d==1?DEV_BG:DEV_BG2, d==1?DEV_BD:DEV_BD2, DEV_TX, d,m,c,w||DEV_W); }
+  var devCol = pcol(DEV_W, [
+    devN(1,'브랜드개발','최운식',27,DEV_W),
+    pvl(2),
+    devN(2,'패션브랜드개발','최운식',4,DEV_W), pvl(2),
+    ['이소민','윤이담','류지민'].map(function(n){return pmbr(DEV_BD2,n);}).join(''),
+    psep(),
+    devN(2,'우먼즈패션개발','나하늘',12,DEV_W), pvl(2),
+    ['안나연','김주연','강민지','박태이','조주원','홍서연','손수지','박희영','이수정','문혜빈','박지수'].map(function(n){return pmbr(DEV_BD2,n);}).join(''),
+    psep(),
+    devN(2,'캐주얼패션개발','염하나',10,DEV_W), pvl(2),
+    ['박수민','이우진','황인선','조우영','홍민경','손유주','최지영','신세연','이민지'].map(function(n){return pmbr(DEV_BD2,n);}).join(''),
+    psep(),
+    devN(2,'소싱','임서경',3,DEV_W), pvl(2),
+    ['안유진','이하은'].map(function(n){return pmbr(DEV_BD2,n);}).join(''),
+  ]);
 
-  function subRow2(subs,bg,bd,tx){
-    var html='';
-    for(var i=0;i<subs.length;i+=2){
-      var a=subs[i],b=subs[i+1];
-      html+='<div style="display:flex;gap:1pt;margin-top:1pt;">'
-          + pnb(bg,bd,tx,a[0],a[1],a[2],SW,'')
-          + (b?pnb(bg,bd,tx,b[0],b[1],b[2],SW,''):'')
-          +'</div>';
-    }
-    return html;
+  /* ── 브랜드 공통 (1컬럼: 38pt) ── */
+  var CMN_W=38, CMN_BD='#C8C5BE', CMN_BG='#F3F2EE', CMN_TX='#444';
+  var cmn = pcol(CMN_W, [
+    pnb(CMN_BG,CMN_BD,CMN_TX,'브랜드 공통','',0,CMN_W),
+    pvl(2),
+    pnb(CMN_BG,CMN_BD,CMN_TX,'오프라인세일즈','김유성',1,CMN_W),
+    pvl(1),
+    pnb(CMN_BG,CMN_BD,CMN_TX,'전략&데이터','김준원',4,CMN_W), pvl(1),
+    ['이진아','문수영','정다움'].map(function(n){return pmbr(CMN_BD,n);}).join(''),
+    pvl(1),
+    pnb(CMN_BG,CMN_BD,CMN_TX,'브랜드Staff','',3,CMN_W), pvl(1),
+    ['박현상','채명진','김현규'].map(function(n){return pmbr(CMN_BD,n);}).join(''),
+  ]);
+
+  /* ── 무신사스탠다드 (5컬럼) ── */
+  var SW=32, SBG='#DBEAFE', SBD='#60A5FA', STX='#1E40AF', SBG2='#EFF6FF', SBD2='#93C5FD', SBG3='#F8FBFF';
+  function sN(d,m,c,w){ return pnb(d==1?SBG:d==2?SBG2:SBG3, d==1?SBD:SBD2, STX, d,m,c,w||SW); }
+
+  /* IMC 하위 */
+  var imcMembers=['김민용','조소미','안수빈','임다은','장하빈','박지윤','권송현','CX:권정은','우아영','박수빈','김하영'];
+  /* 콘텐츠 마케팅 하위 */
+  var cntMembers=['이화진','조예나','지선영','박소서','정도영','김초은','조영찬','성다은','최수영','이인직','노수진','최수연','김훈미','박채윤','이서빈','김애영','이도윤'];
+  /* 오프라인사업 하위 */
+  var offlMembers=['심혁(상품컨트롤)','홍수인','박대영','두현진','김성은','최종민','정소이','박기홍','김채린(VMD)','김경주','박상건','김채하','김지유','박종우','신지수','서민정','최원경','선진영(겸)(리테일)','전루미','양승현','조승현','최경민','강영석','손동현','정승이'];
+
+  var sCol1 = pcol(SW, [
+    sN(1,'기획MD','김병관',8),pvl(2),
+    ['황서영','손정권','김다슬','박은진','허소영','이인하','장유정'].map(function(n){return pmbr(SBD2,n);}).join(''),
+    psep(),
+    sN(1,'소싱','윤정민',13),pvl(2),
+    ['최호림','엄기훈','장인영','김지성','서은진','김민수'].map(function(n){return pmbr(SBD2,n);}).join(''),
+    sN(2,'우븐','조우현',6),pvl(1),
+    ['박용수','민병국','이상엽','염승윤','최희연'].map(function(n){return pmbr(SBD2,n);}).join(''),
+  ]);
+
+  var sCol2 = pcol(SW, [
+    sN(1,'디자인','이건오',37),pvl(2),
+    ['박지은','엄수민','김수빈'].map(function(n){return pmbr(SBD2,n);}).join(''),
+    sN(2,'맨즈디자인','김지훈',14),pvl(1),
+    ['김지용','염진아','이지수','정진우','홍유석','신재호','박인호','우윤구','최지완','신윤주','정주연','유희경','김도형'].map(function(n){return pmbr(SBD2,n);}).join(''),
+  ]);
+
+  var sCol3 = pcol(SW, [
+    '<div style="height:14pt;"></div>', /* 디자인 헤더 높이 맞춤 */
+    sN(2,'우먼즈디자인','임혜진',10),pvl(1),
+    ['김빛한올','정희선','송호연','한지연','이예진','강현정','이성욱','이혜린','김효영'].map(function(n){return pmbr(SBD2,n);}).join(''),
+    sN(2,'키즈디자인','임유진',4),pvl(1),
+    ['정보희','김은지','박예진'].map(function(n){return pmbr(SBD2,n);}).join(''),
+    sN(2,'테크니컬디자인','박영희',5),pvl(1),
+    ['임명섭','김유진','조희진','김남수'].map(function(n){return pmbr(SBD2,n);}).join(''),
+  ]);
+
+  var sCol4 = pcol(SW, [
+    sN(1,'무신사스탠다드마케팅','오기현',30),pvl(2),
+    sN(2,'IMC마케팅','김하연',12),pvl(1),
+    imcMembers.map(function(n){return pmbr(SBD2,n);}).join(''),
+    sN(2,'콘텐츠마케팅','오기현(겸)',17),pvl(1),
+    cntMembers.map(function(n){return pmbr(SBD2,n);}).join(''),
+  ]);
+
+  var sCol5 = pcol(SW, [
+    sN(1,'오프라인사업','선진영',25),pvl(2),
+    offlMembers.map(function(n){return pmbr(SBD,n);}).join(''),
+    psep(),
+    sN(1,'온라인사업','김민수',11),pvl(2),
+    ['강혜리','이정훈'].map(function(n){return pmbr(SBD2,n);}).join(''),
+    sN(2,'온라인MD','김현',8),pvl(1),
+    ['유다휘','배규태','정채은','신명철','이지현','한상은','정지형'].map(function(n){return pmbr(SBD2,n);}).join(''),
+    psep(),
+    sN(1,'무신사스탠다드홈','박영민',6),pvl(1),
+    ['이현우','박대선','민준기','문영우','정은실'].map(function(n){return pmbr(SBD,n);}).join(''),
+    psep(),
+    '<div style="display:flex;gap:1pt;">'+
+      pnb(SBG2,SBD2,STX,'키즈TF','구본용',3,SW/2-0.5)+'<div style="width:0.5pt;"></div>'+
+      pnb(SBG2,SBD2,STX,'ACC TF','장세미',2,SW/2-0.5)+
+    '</div>',
+    pvl(1),
+    sN(2,'언더웨어TF','강문영',1,SW),
+  ]);
+
+  /* ── 트레이딩 (2컬럼: 각 40pt) ── */
+  var TW=40, TBG='#FEF3C7', TBD='#FBBF24', TTX='#78350F', TBG2='#FFFBEB', TBD2='#FDE68A', TBG3='#FFFDF5';
+  function tN(d,m,c,w){ return pnb(d==1?TBG:d==2?TBG2:TBG3, d==1?TBD:TBD2, TTX, d,m,c,w||TW); }
+
+  var tCol1 = pcol(TW, [
+    tN(1,'브랜드1','손영일',47),pvl(2),
+    tN(2,'브랜드기획','모승환',12),pvl(1),
+    tN(3,'브랜드기획1','모승환(겸)',6,TW),pvl(1),
+    ['박반석','이규학','이지언','박원','박준혁','김소윤'].map(function(n){return pmbr(TBD2,n);}).join(''),
+    tN(3,'브랜드기획2','이선희',5,TW),pvl(1),
+    ['이서형','한호희','권수민','김하영'].map(function(n){return pmbr(TBD2,n);}).join(''),
+    psep(),
+    tN(2,'브랜드리테일','신우철',18),pvl(1),
+    pmbr(TBD2,'이덕진'),
+    tN(3,'오프라인리테일','신우철(겸)',4,TW),pvl(1),
+    ['정용휘','안혜림','이헌석','권기원'].map(function(n){return pmbr(TBD2,n);}).join(''),
+    tN(3,'온라인리테일','신우철(겸)',7,TW),pvl(1),
+    ['정하나','정하윤','이신혜','장지은','김형균','조혜정','이윤재'].map(function(n){return pmbr(TBD2,n);}).join(''),
+    tN(3,'리테일기획','유혜란',5,TW),pvl(1),
+    ['김윤','정영현','강혜인','정민종'].map(function(n){return pmbr(TBD2,n);}).join(''),
+    psep(),
+    tN(2,'프로덕트사업','김성준',11),pvl(1),
+    ['함지연','신민정','문환웅','황민순','박소현','김진영','이다솜','박천교','김연빈','정지원'].map(function(n){return pmbr(TBD2,n);}).join(''),
+    psep(),
+    tN(2,'트레이딩마케팅','',5), pvl(1),
+    ['김민지','최유정','탁피어남','최효선','김유진'].map(function(n){return pmbr(TBD2,n);}).join(''),
+  ]);
+
+  var tCol2 = pcol(TW, [
+    tN(1,'브랜드2','성명수',21),pvl(2),
+    ['이동협','연제명','김영주','김민경','박예인','정민아','홍소영','이효주','박소현'].map(function(n){return pmbr(TBD,n);}).join(''),
+    tN(2,'멀티브랜드개발','채경락',4),pvl(1),
+    ['이상원','박지혜','한경범'].map(function(n){return pmbr(TBD2,n);}).join(''),
+    tN(2,'모노브랜드개발','김건형',7),pvl(1),
+    ['정혜민','고주은','이의재','김수연','이소미','조승우'].map(function(n){return pmbr(TBD2,n);}).join(''),
+    psep(),
+    tN(1,'콘텐츠','박은경',15),pvl(2),
+    tN(2,'트레이딩VMD','박은경(겸)',4),pvl(1),
+    ['박현이','윤정원','김준섭','안세린'].map(function(n){return pmbr(TBD2,n);}).join(''),
+    tN(2,'BX디자인','최현균',5),pvl(1),
+    ['김소민','문누리','방서연','김소민'].map(function(n){return pmbr(TBD2,n);}).join(''),
+    tN(2,'촬영','고윤성',5),pvl(1),
+    ['이경윤','강창구','김현중','선유이'].map(function(n){return pmbr(TBD2,n);}).join(''),
+    psep(),
+    tN(1,'트레이딩 운영지원','김지호',28),pvl(2),
+    tN(2,'물류','강상원',7),pvl(1),
+    ['박수빈','이선민','김주영','정현욱','정혜인','박슬기'].map(function(n){return pmbr(TBD2,n);}).join(''),
+    tN(2,'CS','김지호(겸)',10),pvl(1),
+    tN(3,'상품운영','',4,TW),pvl(1),
+    ['김나연','김효진','유승미','이은영'].map(function(n){return pmbr(TBD2,n);}).join(''),
+    tN(3,'CS','',6,TW),pvl(1),
+    ['김효민','김방현','권순영','이주섭','이애리','심원희'].map(function(n){return pmbr(TBD2,n);}).join(''),
+    psep(),
+    pmbr(TBD,'권지훈 (직속)'),
+  ]);
+
+  /* ── 루트 헤더 ── */
+  var totalCnt=d.total_active;
+  var rootBox='<div style="background:#111;border:1pt solid #111;border-radius:3pt;padding:2.5pt 4pt;display:inline-flex;align-items:center;gap:6pt;margin-bottom:2pt;">'
+    +'<span style="font-size:7pt;font-weight:700;color:#fff;">무신사 브랜드</span>'
+    +'<span style="font-size:5.5pt;font-weight:600;color:#fff;background:rgba(255,255,255,0.2);border-radius:2pt;padding:0 3pt;">최운식 · 재직 '+totalCnt+'명</span>'
+    +'</div>';
+
+  /* N-2 헤더 라벨 */
+  function secHead(label,cnt,bg,tx){
+    return '<div style="background:'+bg+';border-radius:3pt;padding:1.5pt 5pt;margin-bottom:1.5pt;display:flex;justify-content:space-between;align-items:center;">'
+      +'<span style="font-size:6pt;font-weight:700;color:'+tx+';">'+label+'</span>'
+      +'<span style="font-size:5pt;color:'+tx+';">'+cnt+'명</span></div>';
   }
 
-  var stdSubs=[['기획MD','김병관',8],['디자인','이건오',37],['소싱','윤정민',13],['무신사스탠다드마케팅','오기현',30],['오프라인사업','선진영',25],['온라인사업','김민수',11],['무신사스탠다드홈','박영민',6],['키즈TF','구본용',3],['ACC TF','장세미',2],['언더웨어TF','강문영',1]];
-  var devSubs=[['패션브랜드개발','최운식',4],['우먼즈패션개발','나하늘',12],['캐주얼패션개발','염하나',10],['소싱','임서경',3]];
-  var trdSubs=[['브랜드1','손영일',47],['브랜드2','성명수',21],['콘텐츠','박은경',15],['트레이딩 운영지원','김지호',28]];
-
-  var concSpan='<span style="font-size:4pt;background:rgba(0,0,0,0.1);border-radius:2pt;padding:0 2pt;margin-left:1pt;">겸</span>';
-
-  var stdCol='<div style="display:flex;flex-direction:column;align-items:center;width:'+(SW*2+3)+'pt;">'
-    + pnb('#DBEAFE','#60A5FA','#1E40AF','무신사스탠다드'+concSpan,'최운식',stdCnt,SW*2+3,'')
-    + subRow2(stdSubs,'#EFF6FF','#93C5FD','#1E40AF')+'</div>';
-
-  var devCol='<div style="display:flex;flex-direction:column;align-items:center;width:'+(SW*2+3)+'pt;">'
-    + pnb('#D1FAE5','#34D399','#065F46','브랜드개발'+concSpan,'최운식',devCnt,SW*2+3,'')
-    + subRow2(devSubs,'#ECFDF5','#6EE7B7','#065F46')+'</div>';
-
-  var trdCol='<div style="display:flex;flex-direction:column;align-items:center;width:'+(SW*2+3)+'pt;">'
-    + pnb('#FEF3C7','#FBBF24','#78350F','트레이딩'+concSpan,'최운식',trdCnt,SW*2+3,'')
-    + subRow2(trdSubs,'#FFFBEB','#FDE68A','#78350F')+'</div>';
-
-  var rootBox=pnb('#111','#111','#fff','브랜드','최운식',d.total_active,W,'');
-
-  return '<div style="display:flex;flex-direction:column;align-items:center;width:100%;">'
-    + '<div style="display:flex;flex-direction:column;align-items:center;">'
-    + rootBox + pvl(V) + common + pvl(V)
-    + '<div style="display:flex;gap:6pt;align-items:flex-start;">'
-    + stdCol + devCol + trdCol
-    + '</div></div></div>';
+  return rootBox
+    +'<div style="display:flex;gap:2pt;align-items:flex-start;width:100%;">'
+    +'<div style="display:flex;flex-direction:column;width:'+DEV_W+'pt;">'
+      +secHead('브랜드개발',27,'#D1FAE5','#065F46')+devCol+'</div>'
+    +pvsep()
+    +'<div style="display:flex;flex-direction:column;width:'+CMN_W+'pt;">'
+      +secHead('브랜드 공통','','#F3F2EE','#444')+cmn+'</div>'
+    +pvsep()
+    +'<div style="display:flex;flex-direction:column;">'
+      +secHead('무신사스탠다드',138,'#DBEAFE','#1E40AF')
+      +'<div style="display:flex;gap:2pt;">'+sCol1+pvsep()+sCol2+pvsep()+sCol3+pvsep()+sCol4+pvsep()+sCol5+'</div></div>'
+    +pvsep()
+    +'<div style="display:flex;flex-direction:column;">'
+      +secHead('트레이딩',112,'#FEF3C7','#78350F')
+      +'<div style="display:flex;gap:2pt;">'+tCol1+pvsep()+tCol2+'</div></div>'
+    +'</div>';
 }
 
-/* ─── 2. 무신사스탠다드 상세 ─── */
-function buildStdPrintDetail(allData,month){
-  var d=allData[month];
-  var stdD=Object.values(d.detail_data).find(function(v){return v.dept==='무신사스탠다드';});
-  var stdTotal=stdD?stdD.cnt:138;
-  var BG='#DBEAFE',BD='#60A5FA',TX='#1E40AF';
-  var BG2='#EFF6FF',BD2='#93C5FD';
-  var BG3='#F8FBFF',BD3='#BFDBFE';
-  var W1=42,W2=48,W3=46,W4=46,V=2;
-
-  var col1='<div style="display:flex;flex-direction:column;width:'+W1+'pt;">'
-    +pnb(BG,BD,TX,'기획MD','김병관',8,W1,'')+pvl(V)
-    +['황서영','손정권','김다슬','박은진','허소영','이인하','장유정'].map(function(n){return pmbr(BD,n);}).join('')
-    +'</div>';
-
-  var col2='<div style="display:flex;flex-direction:column;width:'+(W2*2+3)+'pt;">'
-    +pnb(BG,BD,TX,'디자인','이건오',37,W2*2+3,'')+pvl(V)
-    +'<div style="display:flex;gap:2pt;">'
-    +'<div style="width:'+W2+'pt;">'
-    +pnb(BG2,BD2,'#111','맨즈디자인','김지훈',14,W2,'')+pvl(2)
-    +['김지용','염진아','이지수','정진우','홍유석','신재호','박인호','우윤구','최지완','신윤주','정주연','유희경','김도형'].map(function(n){return pmbr(BD2,n);}).join('')
-    +'</div>'
-    +'<div style="width:'+W2+'pt;">'
-    +pnb(BG2,BD2,'#111','우먼즈디자인','임혜진',10,W2,'')+pvl(2)
-    +['김빛한올','정희선','송호연','한지연','이예진','강현정','이성욱','이혜린','김효영'].map(function(n){return pmbr(BD2,n);}).join('')
-    +psep()
-    +pnb(BG2,BD2,'#111','키즈디자인','임유진',4,W2,'')+pvl(2)
-    +['정보희','김은지','박예진'].map(function(n){return pmbr(BD2,n);}).join('')
-    +psep()
-    +pnb(BG2,BD2,'#111','테크니컬디자인','박영희',5,W2,'')+pvl(2)
-    +['임명섭','김유진','조희진','김남수'].map(function(n){return pmbr(BD2,n);}).join('')
-    +'</div></div></div>';
-
-  var col3='<div style="display:flex;flex-direction:column;width:'+W3+'pt;gap:2pt;">'
-    +'<div>'
-    +pnb(BG,BD,TX,'소싱','윤정민',13,W3,'')+pvl(V)
-    +['최호림','엄기훈','장인영','김지성','서은진','김민수'].map(function(n){return pmbr(BD,n);}).join('')
-    +pnb(BG2,BD2,'#111','우븐','조우현',6,W3,'')+pvl(2)
-    +['박용수','민병국','이상엽','염승윤','최희연'].map(function(n){return pmbr(BD2,n);}).join('')
-    +'</div><div>'
-    +pnb(BG,BD,TX,'무신사스탠다드마케팅','오기현',30,W3,'')+pvl(V)
-    +pnb(BG2,BD2,'#111','IMC마케팅','김하연',9,W3,'')+pvl(2)
-    +['김민용','조소미','안수빈','임다은','장하빈','박지윤','권송현'].map(function(n){return pmbr(BD2,n);}).join('')
-    +pnb(BG3,BD3,'#333','CX마케팅','권정은',4,W3,'')+pvl(2)
-    +['우아영','박수빈','김하영'].map(function(n){return pmbr(BD3,n);}).join('')
-    +psep()
-    +pnb(BG2,BD2,'#111','콘텐츠마케팅','오기현(겸)',20,W3,'')+pvl(V)
-    +'<div style="display:flex;gap:1pt;">'
-    +'<div style="width:'+(W3/2-0.5)+'pt;">'
-    +pnb(BG3,BD3,'#333','무신사스탠다드콘텐츠','오기현(겸)',10,W3/2-0.5,'')+pvl(2)
-    +['이화진','조예나','지선영','박소서','정도영','김초은','조영찬','성다은','최수영'].map(function(n){return pmbr(BD3,n);}).join('')
-    +'</div><div style="width:'+(W3/2-0.5)+'pt;">'
-    +pnb(BG3,BD3,'#333','무신사스탠다드포토','오기현(겸)',9,W3/2-0.5,'')+pvl(2)
-    +['이인직','노수진','최수연','김훈미','박채윤','이서빈','김애영','이도윤'].map(function(n){return pmbr(BD3,n);}).join('')
-    +'</div></div></div></div>';
-
-  var col4='<div style="display:flex;flex-direction:column;width:'+W4+'pt;gap:2pt;">'
-    +pnb(BG,BD,TX,'오프라인사업','선진영',25,W4,'')+pvl(V)
-    +[['상품컨트롤','심혁',8,['홍수인','박대영','두현진','김성은','최종민','정소이','박기홍']],
-      ['VMD','김채린',9,['김경주','박상건','김채하','김지유','박종우','신지수','서민정','최원경']],
-      ['리테일','선진영(겸)',8,['전루미','양승현','조승현','최경민','강영석','손동현','정승이']]
-    ].map(function(s){
-      return pnb(BG2,BD2,'#111',s[0],s[1],s[2],W4,'')+pvl(2)+s[3].map(function(n){return pmbr(BD2,n);}).join('');
-    }).join(psep())
-    +psep()
-    +pnb(BG,BD,TX,'온라인사업','김민수',11,W4,'')+pvl(V)
-    +pnb(BG2,BD2,'#111','온라인MD','김현',8,W4,'')+pvl(2)
-    +['유다휘','배규태','정채은','신명철','이지현','한상은','정지형'].map(function(n){return pmbr(BD2,n);}).join('')
-    +psep()
-    +pnb(BG,BD,TX,'무신사스탠다드홈','박영민',6,W4,'')+pvl(V)
-    +['이현우','박대선','민준기','문영우','정은실'].map(function(n){return pmbr(BD,n);}).join('')
-    +psep()
-    +'<div style="display:flex;gap:1pt;">'
-    +'<div style="width:'+(W4/2-0.5)+'pt;">'
-    +pnb(BG2,BD2,'#111','키즈TF','구본용',3,W4/2-0.5,'')+pvl(2)
-    +['박지수','이영훈'].map(function(n){return pmbr(BD2,n);}).join('')
-    +'</div><div style="width:'+(W4/2-0.5)+'pt;">'
-    +pnb(BG2,BD2,'#111','ACC TF','장세미',2,W4/2-0.5,'')+pvl(2)
-    +pmbr(BD2,'박희우')
-    +'</div></div>'
-    +psep()
-    +pnb(BG2,BD2,'#111','언더웨어TF','강문영',1,W4,'')
-    +'</div>';
-
-  var head='<div style="background:#DBEAFE;border:1pt solid #60A5FA;border-radius:3pt;padding:2.5pt 4pt;margin-bottom:3pt;">'
-    +'<div style="display:flex;justify-content:space-between;align-items:center;">'
-    +'<span style="font-size:7pt;font-weight:700;color:#1E40AF;">무신사스탠다드</span>'
-    +'<span style="font-size:5.5pt;font-weight:600;background:#60A5FA;color:#fff;border-radius:2pt;padding:0 3pt;">재직 '+stdTotal+'명</span>'
-    +'</div></div>';
-
-  return head+'<div style="display:flex;gap:2.5pt;align-items:flex-start;width:100%;">'
-    +col1+pvsep()+col2+pvsep()+col3+pvsep()+col4+'</div>';
-}
-
-/* ─── 3. 브랜드개발 상세 ─── */
-function buildDevPrintDetail(allData,month){
-  var d=allData[month];
-  var devD=Object.values(d.detail_data).find(function(v){return v.dept==='브랜드개발';});
-  if(!devD) return '';
-  return '<div style="transform:scale(0.65);transform-origin:top left;width:154%;overflow:visible;">'
-       + devD.html + '</div>';
-}
-
-/* ─── 4. 트레이딩 상세 ─── */
-function buildTrdPrintDetail(allData,month){
-  var d=allData[month];
-  var trdD=Object.values(d.detail_data).find(function(v){return v.dept==='트레이딩';});
-  var trdTotal=trdD?trdD.cnt:102;
-  var BG='#FEF3C7',BD='#FBBF24',TX='#78350F';
-  var BG2='#FFFBEB',BD2='#FDE68A';
-  var BG3='#FFFDF5',BD3='#FEF08A';
-  var W=46, V=2;
-
-  var col1='<div style="display:flex;flex-direction:column;width:'+W+'pt;">'
-    +pnb(BG,BD,TX,'브랜드1','손영일',47,W,'')+pvl(V)
-    +pnb(BG2,BD2,TX,'브랜드기획','모승환',12,W,'')+pvl(V)
-    +'<div style="display:flex;gap:1pt;">'
-    +'<div style="width:'+(W/2-0.5)+'pt;">'
-    +pnb(BG3,BD3,'#555','브랜드기획1','모승환(겸)',7,W/2-0.5,'')+pvl(1.5)
-    +['박반석','이규학','이지언','박원','박준혁','김소윤'].map(function(n){return pmbr(BD3,n);}).join('')
-    +'</div><div style="width:'+(W/2-0.5)+'pt;">'
-    +pnb(BG3,BD3,'#555','브랜드기획2','이선희',5,W/2-0.5,'')+pvl(1.5)
-    +['이서형','한호희','권수민','김하영'].map(function(n){return pmbr(BD3,n);}).join('')
-    +'</div></div>'
-    +psep()
-    +pnb(BG2,BD2,TX,'브랜드리테일','신우철',18,W,'')+pvl(V)
-    +'<div style="display:flex;gap:1pt;">'
-    +'<div style="width:'+(W/2-0.5)+'pt;">'
-    +pnb(BG3,BD3,'#555','오프라인리테일','신우철(겸)',5,W/2-0.5,'')+pvl(1.5)
-    +['정용휘','안혜림','이헌석','권기원'].map(function(n){return pmbr(BD3,n);}).join('')
-    +'</div><div style="width:'+(W/2-0.5)+'pt;">'
-    +pnb(BG3,BD3,'#555','온라인리테일','신우철(겸)',8,W/2-0.5,'')+pvl(1.5)
-    +['정하나','정하윤','이신혜','장지은','김형균','조혜정','이윤재'].map(function(n){return pmbr(BD3,n);}).join('')
-    +'</div></div>'
-    +psep()
-    +pnb(BG2,BD2,TX,'프로덕트사업','김성준',11,W,'')+pvl(V)
-    +['함지연','신민정','문환웅','황민순','박소현','김진영','이다솜','박천교','김연빈','정지원'].map(function(n){return pmbr(BD2,n);}).join('')
-    +psep()
-    +pnb(BG2,BD2,TX,'트레이딩 마케팅','김민지 외 4',5,W,'')
-    +'</div>';
-
-  var col2='<div style="display:flex;flex-direction:column;width:'+W+'pt;">'
-    +pnb(BG,BD,TX,'브랜드2','성명수',21,W,'')+pvl(V)
-    +['이동협','연제명','김영주','김민경','박예인','정민아','홍소영','이효주','박소현'].map(function(n){return pmbr(BD,n);}).join('')
-    +psep()
-    +pnb(BG2,BD2,TX,'멀티브랜드개발','채경락',4,W,'')+pvl(1.5)
-    +['이상원','박지혜','한경범'].map(function(n){return pmbr(BD2,n);}).join('')
-    +psep()
-    +pnb(BG2,BD2,TX,'모노브랜드개발','김건형',7,W,'')+pvl(1.5)
-    +['정혜민','고주은','이의재','김수연','이소미','조승우'].map(function(n){return pmbr(BD2,n);}).join('')
-    +'</div>';
-
-  var col3='<div style="display:flex;flex-direction:column;width:'+W+'pt;">'
-    +pnb(BG,BD,TX,'콘텐츠','박은경',15,W,'')+pvl(V)
-    +pnb(BG2,BD2,TX,'트레이딩 VMD','박은경(겸)',5,W,'')+pvl(1.5)
-    +['박현이','윤정원','김준섭','안세린'].map(function(n){return pmbr(BD2,n);}).join('')
-    +psep()
-    +pnb(BG2,BD2,TX,'트레이딩 BX디자인','최현균',5,W,'')+pvl(1.5)
-    +['김소민','문누리','방서연','김소민'].map(function(n){return pmbr(BD2,n);}).join('')
-    +psep()
-    +pnb(BG2,BD2,TX,'촬영','고윤성',5,W,'')+pvl(1.5)
-    +['이경윤','강창구','김현중','선유이'].map(function(n){return pmbr(BD2,n);}).join('')
-    +'</div>';
-
-  var col4='<div style="display:flex;flex-direction:column;width:'+W+'pt;">'
-    +pnb(BG,BD,TX,'트레이딩 운영지원','김지호',28,W,'')+pvl(V)
-    +pnb(BG2,BD2,TX,'물류','강상원',7,W,'')+pvl(1.5)
-    +['박수빈','이선민','김주영','정현욱','정혜인','박슬기'].map(function(n){return pmbr(BD2,n);}).join('')
-    +psep()
-    +pnb(BG2,BD2,TX,'CS','김지호(겸)',14,W,'')+pvl(1.5)
-    +'<div style="display:flex;gap:1pt;">'
-    +'<div style="width:'+(W/2-0.5)+'pt;">'
-    +'<div style="font-size:4pt;color:#888;margin-bottom:1pt;">상품운영</div>'
-    +['김나연','김효진','유승미','이은영'].map(function(n){return pmbr(BD2,n);}).join('')
-    +'</div><div style="width:'+(W/2-0.5)+'pt;">'
-    +'<div style="font-size:4pt;color:#888;margin-bottom:1pt;">CS</div>'
-    +['김효민','김방현','권순영','이주섭','이애리','심원희'].map(function(n){return pmbr(BD2,n);}).join('')
-    +'</div></div>'
-    +psep()
-    +pnb('#F3F2EE','#C8C5BE','#444','트레이딩 (직속)','권지훈',1,W,'')
-    +'</div>';
-
-  var head='<div style="background:#FEF3C7;border:1pt solid #FBBF24;border-radius:3pt;padding:2.5pt 4pt;margin-bottom:3pt;">'
-    +'<div style="display:flex;justify-content:space-between;align-items:center;">'
-    +'<span style="font-size:7pt;font-weight:700;color:#78350F;">트레이딩</span>'
-    +'<span style="font-size:5.5pt;font-weight:600;background:#FBBF24;color:#fff;border-radius:2pt;padding:0 3pt;">재직 '+trdTotal+'명</span>'
-    +'</div></div>';
-
-  return head+'<div style="display:flex;gap:2.5pt;align-items:flex-start;width:100%;">'
-    +col1+pvsep()+col2+pvsep()+col3+pvsep()+col4+'</div>';
-}
-
-/* ─── 5. HC 변동현황 ─── */
-function buildHCPrint(){
-  var org='합계';
-  var allIdxs=getIdxs('all');
-  var allVals=allIdxs.map(function(i){return HC_DATA.data[org][i]!=null?HC_DATA.data[org][i]:null;});
-
-  var recent6=getIdxs('6');
-  var latestMonthIdx=recent6[recent6.length-1];
-  var latestMonth=HC_DATA.months[latestMonthIdx];
-  var latestVal=HC_DATA.data[org][latestMonthIdx]!=null?HC_DATA.data[org][latestMonthIdx]:null;
-  var prev1Idx=recent6[recent6.length-2];
-  var prev1Val=HC_DATA.data[org][prev1Idx]!=null?HC_DATA.data[org][prev1Idx]:null;
-  var prevYearIdx=latestMonthIdx-12;
-  var prevYearVal=prevYearIdx>=0&&HC_DATA.data[org][prevYearIdx]!=null?HC_DATA.data[org][prevYearIdx]:null;
-  var mom=(latestVal!=null&&prev1Val!=null)?latestVal-prev1Val:null;
-  var yoy=(latestVal!=null&&prevYearVal!=null)?latestVal-prevYearVal:null;
-  var momPct=(mom!=null&&prev1Val>0)?(mom/prev1Val*100).toFixed(1):null;
-  var yoyPct=(yoy!=null&&prevYearVal>0)?(yoy/prevYearVal*100).toFixed(1):null;
-  var validAll=allVals.filter(function(v){return v!==null;});
-  var maxV=validAll.length?Math.max.apply(null,validAll):0;
-  var minV=validAll.length?Math.min.apply(null,validAll):0;
-
-  function dSign(d,pct){
-    if(d===null)return '';
-    var s=d>0?'+':''; var cls=d>0?'color:#16A34A':d<0?'color:#DC2626':'color:#888';
-    return '<span style="'+cls+';font-size:6pt;">'+s+d+'명'+(pct!==null?' ('+s+pct+'%)':'')+'</span>';
-  }
-
-  var sumHtml='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2mm;margin-bottom:2mm;">'
-    +'<div style="background:#fff;border:0.5pt solid #E5E3DE;border-radius:3pt;padding:2mm 3mm;">'
-    +'<div style="font-size:5.5pt;color:#888;margin-bottom:1mm;">최신 인원 ('+(latestMonth||'-')+')</div>'
-    +'<div style="font-size:14pt;font-weight:700;color:#111;">'+(latestVal!=null?latestVal:'-')+'명</div></div>'
-    +'<div style="background:#fff;border:0.5pt solid #E5E3DE;border-radius:3pt;padding:2mm 3mm;">'
-    +'<div style="font-size:5.5pt;color:#888;margin-bottom:1mm;">전월 대비</div>'
-    +'<div style="font-size:11pt;font-weight:700;color:#111;">'+(mom!==null?(mom>=0?'+':'')+mom+'명':'-')+'</div>'
-    +dSign(mom,momPct)+'</div>'
-    +'<div style="background:#fff;border:0.5pt solid #E5E3DE;border-radius:3pt;padding:2mm 3mm;">'
-    +'<div style="font-size:5.5pt;color:#888;margin-bottom:1mm;">전년 동월 대비</div>'
-    +'<div style="font-size:11pt;font-weight:700;color:#111;">'+(yoy!==null?(yoy>=0?'+':'')+yoy+'명':'-')+'</div>'
-    +dSign(yoy,yoyPct)+'</div>'
-    +'<div style="background:#fff;border:0.5pt solid #E5E3DE;border-radius:3pt;padding:2mm 3mm;">'
-    +'<div style="font-size:5.5pt;color:#888;margin-bottom:1mm;">최고 / 최저</div>'
-    +'<div style="font-size:9pt;font-weight:700;color:#111;">'+maxV+' / '+minV+'명</div></div></div>';
-
-  /* SVG 차트: 1~12월 X축, 전년(연한)·올해(진한) */
-  var SVG_W=530, SVG_H=62;
-  var PAD={left:28,right:8,top:10,bottom:14};
-  var cW=SVG_W-PAD.left-PAD.right, cH=SVG_H-PAD.top-PAD.bottom;
-
-  var years={};
-  allIdxs.forEach(function(idx,ii){
-    var m=HC_DATA.months[idx];
-    var y=m.slice(0,4);
-    var mo=parseInt(m.replace(/.*년 /,'').replace('월',''));
-    if(!years[y])years[y]={};
-    years[y][mo]=allVals[ii];
-  });
-  var sortedYears=Object.keys(years).sort();
-  var thisYear=latestMonth?latestMonth.slice(0,4):sortedYears[sortedYears.length-1];
-  var lastYear=String(parseInt(thisYear)-1);
-  var mos=[1,2,3,4,5,6,7,8,9,10,11,12];
-  var thisVals=mos.map(function(mo){return years[thisYear]&&years[thisYear][mo]!=null?years[thisYear][mo]:null;});
-  var lastVals=mos.map(function(mo){return years[lastYear]&&years[lastYear][mo]!=null?years[lastYear][mo]:null;});
-  var combined=thisVals.concat(lastVals).filter(function(v){return v!==null;});
-  var vMin=combined.length?Math.max(0,Math.min.apply(null,combined)-10):0;
-  var vMax=combined.length?Math.max.apply(null,combined)+10:400;
-  var vR=vMax-vMin||1;
-  function toX(i){return PAD.left+(i/11)*cW;}
-  function toY(v){return PAD.top+(1-(v-vMin)/vR)*cH;}
-
-  var grid='';
-  [0,1,2,3].forEach(function(s){
-    var v=vMin+(vR/3)*s, y=toY(v);
-    grid+='<line x1="'+PAD.left+'" y1="'+y+'" x2="'+(SVG_W-PAD.right)+'" y2="'+y+'" stroke="#F0EEE9" stroke-width="0.5"/>';
-    grid+='<text x="'+(PAD.left-2)+'" y="'+(y+1.5)+'" text-anchor="end" font-size="4.5" fill="#bbb">'+Math.round(v)+'</text>';
-  });
-
-  var xLabels='';
-  mos.forEach(function(mo,i){
-    xLabels+='<text x="'+toX(i)+'" y="'+(SVG_H-1)+'" text-anchor="middle" font-size="4.5" fill="#888">'+mo+'월</text>';
-  });
-
-  function mkPath(vals,color,opacity,sw){
-    var path='',started=false;
-    vals.forEach(function(v,i){
-      if(v===null){started=false;return;}
-      if(!started){path='M'+toX(i)+','+toY(v);started=true;}
-      else path+=' L'+toX(i)+','+toY(v);
-    });
-    return path?'<path d="'+path+'" fill="none" stroke="'+color+'" stroke-width="'+sw+'" stroke-opacity="'+opacity+'" stroke-linejoin="round"/>':'';
-  }
-  function mkDots(vals,color,opacity,r,yr){
-    return vals.map(function(v,i){
-      if(v===null)return '';
-      var x=toX(i),y=toY(v);
-      var memoKey=yr+'년 '+mos[i]+'월';
-      var hasMemo=!!HC_DATA.memos[memoKey];
-      var fill=hasMemo?'#F59E0B':color;
-      return '<circle cx="'+x+'" cy="'+y+'" r="'+(hasMemo?r+1.5:r)+'" fill="'+fill+'" fill-opacity="'+opacity+'" stroke="white" stroke-width="0.5"/>';
-    }).join('');
-  }
-
-  var areaPath='',started=false,pts=[];
-  thisVals.forEach(function(v,i){
-    if(v===null){started=false;return;}
-    pts.push({x:toX(i),y:toY(v)});
-    if(!started){areaPath='M'+toX(i)+','+toY(v);started=true;}
-    else areaPath+=' L'+toX(i)+','+toY(v);
-  });
-  if(pts.length>1){var lp=pts[pts.length-1],fp=pts[0];areaPath+=' L'+lp.x+','+(SVG_H-PAD.bottom)+' L'+fp.x+','+(SVG_H-PAD.bottom)+' Z';}
-
-  var svgHtml='<div style="background:#fff;border:0.5pt solid #E5E3DE;border-radius:3pt;padding:2mm;margin-bottom:2mm;">'
-    +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1mm;">'
-    +'<span style="font-size:6pt;font-weight:600;color:#333;">합계 HC 추이 (월별)</span>'
-    +'<div style="display:flex;gap:4pt;align-items:center;font-size:5pt;color:#666;">'
-    +'<span style="display:inline-flex;align-items:center;gap:1.5pt;"><span style="width:10pt;height:1.5pt;background:#2563EB;display:inline-block;"></span>'+thisYear+'년</span>'
-    +'<span style="display:inline-flex;align-items:center;gap:1.5pt;"><span style="width:10pt;height:1.5pt;background:#93C5FD;display:inline-block;"></span>'+lastYear+'년</span>'
-    +'<span style="color:#F59E0B;">📌 특이사항 달</span></div></div>'
-    +'<svg width="'+SVG_W+'" height="'+SVG_H+'" viewBox="0 0 '+SVG_W+' '+SVG_H+'" style="width:100%;height:auto;display:block;">'
-    +'<defs><linearGradient id="pGrad" x1="0" y1="0" x2="0" y2="1">'
-    +'<stop offset="0%" stop-color="#2563EB" stop-opacity="0.1"/>'
-    +'<stop offset="100%" stop-color="#2563EB" stop-opacity="0"/>'
-    +'</linearGradient></defs>'
-    +grid
-    +(areaPath?'<path d="'+areaPath+'" fill="url(#pGrad)"/>':'')
-    +mkPath(lastVals,'#93C5FD',0.7,1)
-    +mkPath(thisVals,'#2563EB',1,1.5)
-    +mkDots(lastVals,'#93C5FD',0.7,1.5,lastYear)
-    +mkDots(thisVals,'#2563EB',1,2,thisYear)
-    +xLabels
-    +'</svg></div>';
-
-  /* 테이블: 전년 동월 + 최근 6개월 */
-  var prevYMIdx=recent6[recent6.length-1]-12;
-  var showIdxs=prevYMIdx>=0?[prevYMIdx].concat(recent6):recent6.slice();
-
-  function mkTd(key,showIdxs){
-    return showIdxs.map(function(idx,ii){
-      var v=HC_DATA.data[key]!=null?HC_DATA.data[key][idx]:null;
-      var pv=ii>0?(HC_DATA.data[key]!=null?HC_DATA.data[key][showIdxs[ii-1]]:null):null;
-      var isRef=ii===0;
-      var delta='';
-      if(v!==null&&pv!==null&&ii>0){var d=v-pv;delta=d>0?'<span style="color:#16A34A;font-size:4pt;">&#9650;'+d+'</span>':d<0?'<span style="color:#DC2626;font-size:4pt;">&#9660;'+Math.abs(d)+'</span>':'';}
-      return '<td style="'+(isRef?'background:#FFFBEB;border-right:1pt solid #FDE68A;':'border-right:0.5pt solid #F0EEE9;')+'">'+(v!=null?v:'-')+delta+'</td>';
-    }).join('');
-  }
-
-  var thCols=showIdxs.map(function(idx,ii){
-    var m=HC_DATA.months[idx];
-    var lbl=m.replace('2025년 ','25/').replace('2026년 ','26/').replace('월','');
-    var isRef=ii===0;
-    return '<th style="'+(isRef?'background:#FEF3C7;color:#78350F;border-right:1pt solid #FBBF24;':'')+'">'+lbl+(isRef?'<br><span style="font-size:4pt;font-weight:400;">전년</span>':'')+'</th>';
-  }).join('');
-
-  var secs=[
-    {label:'무신사 브랜드',key:'무신사 브랜드',color:'#1E40AF',light:'#EFF6FF',subs:['브랜드 Staff','오프라인세일즈','전략 & 데이터','무신사스탠다드','브랜드개발','트레이딩']},
-    {label:'무신사리테일서비스',key:'무신사리테일서비스',color:'#065F46',light:'#ECFDF5',subs:[]},
-    {label:'무신사파트너스',key:'무신사파트너스',color:'#78350F',light:'#FEF3C7',subs:[]},
-  ];
-
-  var tb='<table class="phc-tbl" style="font-size:5pt;">'
-    +'<thead><tr style="background:#F8F7F4;"><th style="text-align:left;min-width:50pt;border-right:0.5pt solid #E0DDD6;">조직</th>'+thCols+'</tr></thead><tbody>';
-  tb+='<tr class="ph-total"><td style="padding-left:3pt;font-weight:700;border-right:0.5pt solid #E0DDD6;">합계</td>'+mkTd('합계',showIdxs)+'</tr>';
-  secs.forEach(function(sec){
-    tb+='<tr class="ph-n1" style="background:'+sec.light+';">'
-      +'<td style="color:'+sec.color+';font-weight:700;padding-left:3pt;border-right:0.5pt solid #E0DDD6;">'+sec.label+'</td>'
-      +mkTd(sec.key,showIdxs)+'</tr>';
-    sec.subs.forEach(function(sub){
-      if(!showIdxs.some(function(idx){return HC_DATA.data[sub]!=null&&HC_DATA.data[sub][idx]!=null;}))return;
-      tb+='<tr class="ph-n2"><td style="padding-left:8pt;color:#555;border-right:0.5pt solid #E0DDD6;">&#8627; '+sub+'</td>'+mkTd(sub,showIdxs)+'</tr>';
-    });
-  });
-  tb+='</tbody></table>';
-
-  return sumHtml+svgHtml
-    +'<div style="background:#fff;border:0.5pt solid #E5E3DE;border-radius:3pt;overflow:hidden;">'
-    +'<div style="background:#F3F2EE;padding:1.5mm 2mm;font-size:6pt;font-weight:600;color:#333;border-bottom:0.5pt solid #E5E3DE;">'
-    +'월별 상세 수치 <span style="font-size:5pt;color:#aaa;font-weight:400;">· 전년 동월 + 최근 6개월</span></div>'
-    +'<div style="overflow:hidden;">'+tb+'</div></div>';
-}
-
-/* ─── 6. 변동현황 ─── */
-function buildChangePrint(d){
-  if(!d.changes)return '';
+/* ─ 2. 변동현황 + 휴직자 ─ */
+function buildOvChange(d){
+  if(!d.changes)return '<p style="color:#aaa;font-size:8pt;">변동현황 없음</p>';
   var types=[
-    {key:'new_join',label:'신규입사',color:'#14532D',bg:'#DCFCE7',icon:'🟢'},
-    {key:'resigned',label:'퇴사',color:'#7F1D1D',bg:'#FEE2E2',icon:'🔴'},
-    {key:'new_leave',label:'신규휴직',color:'#78350F',bg:'#FEF3C7',icon:'🟡'},
-    {key:'returned',label:'복직',color:'#1E40AF',bg:'#EFF6FF',icon:'🔵'},
+    {key:'new_join',label:'신규입사',color:'#14532D',bg:'#DCFCE7',icon:'&#128994;'},
+    {key:'resigned',label:'퇴사',color:'#7F1D1D',bg:'#FEE2E2',icon:'&#128308;'},
+    {key:'new_leave',label:'신규휴직',color:'#78350F',bg:'#FEF3C7',icon:'&#128993;'},
+    {key:'returned',label:'복직',color:'#1E40AF',bg:'#EFF6FF',icon:'&#128309;'},
   ];
   var NL=['무신사스탠다드','브랜드개발','트레이딩','브랜드 공통'];
+  var NC={};
+  N2_COLORS&&Object.keys(N2_COLORS).forEach(function(k){NC[k]=N2_COLORS[k];});
   var cols=types.map(function(t){
     var list=d.changes[t.key]||[];
     var grp={};
     list.forEach(function(r){var k=r.n2||'브랜드 공통';if(!grp[k])grp[k]=[];grp[k].push(r);});
     var n2h=NL.map(function(n2){
-      var items=grp[n2]||[];
-      if(!items.length)return '';
-      var c=N2_COLORS[n2]||{bg:'#F3F2EE',tx:'#444'};
+      var items=grp[n2]||[];if(!items.length)return '';
+      var c=(NC[n2])||{bg:'#F3F2EE',tx:'#444'};
       return '<div class="pchg-n2h" style="background:'+c.bg+';color:'+c.tx+';">'+n2+' '+items.length+'명</div>'
-        +items.map(function(r){return '<div class="pchg-item"><span class="pchg-nm">'+r.name+'</span><span class="pchg-dept"> '+r.dept+'</span></div>';}).join('');
+        +items.map(function(r){return '<div class="pchg-item"><span style="font-weight:600;">'+r.name+'</span><span style="color:#888;margin-left:2pt;">'+r.dept+'</span></div>';}).join('');
     }).join('');
-    return '<div class="pchg-col">'
-      +'<div class="pchg-head" style="background:'+t.bg+';color:'+t.color+';">'+t.icon+' '+t.label+'</div>'
+    return '<div class="pchg-col"><div class="pchg-head" style="background:'+t.bg+';color:'+t.color+';">'+t.icon+' '+t.label+'</div>'
       +'<div class="pchg-cnt" style="color:'+t.color+';">'+list.length+'명</div>'+n2h+'</div>';
   }).join('');
-  return '<div class="pchg-grid">'+cols+'</div>';
+  var chgHtml='<div class="pchg-grid" style="margin-bottom:3mm;">'+cols+'</div>';
+
+  /* 휴직자 - 작은 카드 */
+  var lvHtml='<div style="border-top:0.5pt solid #FDE68A;padding-top:2mm;">'
+    +'<div style="font-size:6pt;font-weight:600;color:#78350F;margin-bottom:1.5mm;">휴직자 현황 '
+    +'<span style="font-size:5.5pt;background:#F59E0B;color:#fff;border-radius:2pt;padding:0 3pt;margin-left:2pt;">'+d.leave_count+'명</span></div>'
+    +'<div class="plv-grid">'
+    +d.leave_cards_all
+      .replace(/class="leave-card"/g,'class="plv-card"')
+      .replace(/<div class="lv-n2-tag"[^>]*>([^<]*)<\/div>/g,'<div class="plv-n2">$1</div>')
+      .replace(/<div class="lv-dept">/g,'<div class="plv-dept">')
+      .replace(/<div class="lv-name">/g,'<div class="plv-name">')
+      .replace(/<div class="lv-period">/g,'<div class="plv-period">')
+      .replace(/<div class="lv-meta">[^<]*<\/div>/g,'')
+    +'</div></div>';
+  return chgHtml+lvHtml;
 }
 
-/* ─── 7. 휴직자 ─── */
-function buildLeavePrint(d){
-  return '<div class="plv-grid">'+d.leave_cards_all
-    .replace(/class="leave-card"/g,'class="plv-card"')
-    .replace(/class="lv-n2-tag"[^>]*>/g,'class="plv-n2">')
-    .replace(/class="lv-dept"/g,'class="plv-dept"')
-    .replace(/class="lv-name"/g,'class="plv-name"')
-    .replace(/class="lv-period"/g,'class="plv-period"')
-    .replace(/<div class="lv-meta">[^<]*<\/div>/g,'')
-    +'</div>';
+/* ─ 3. 무신사스탠다드 상세 (브랜드개발 스타일 — scale 기반) ─ */
+function buildStdDetail(d){
+  var stdD=Object.values(d.detail_data).find(function(v){return v.dept==='무신사스탠다드';});
+  if(!stdD)return '';
+  var head='<div style="background:#DBEAFE;border:1pt solid #60A5FA;border-radius:3pt;padding:2pt 6pt;margin-bottom:3pt;display:flex;justify-content:space-between;">'
+    +'<span style="font-size:7pt;font-weight:700;color:#1E40AF;">무신사스탠다드</span>'
+    +'<span style="font-size:6pt;color:#1E40AF;">재직 '+stdD.cnt+'명</span></div>';
+  /* scale(0.45)로 전체 트리를 A5 너비 안에 압축 */
+  return head+'<div style="transform:scale(0.45);transform-origin:top left;width:222%;overflow:visible;">'+stdD.html+'</div>';
 }
 
-/* ─── 8. 실행 ─── */
+/* ─ 4. 브랜드개발 상세 ─ */
+function buildDevDetail(d){
+  var devD=Object.values(d.detail_data).find(function(v){return v.dept==='브랜드개발';});
+  if(!devD)return '';
+  var head='<div style="background:#D1FAE5;border:1pt solid #34D399;border-radius:3pt;padding:2pt 6pt;margin-bottom:3pt;display:flex;justify-content:space-between;">'
+    +'<span style="font-size:7pt;font-weight:700;color:#065F46;">브랜드개발</span>'
+    +'<span style="font-size:6pt;color:#065F46;">재직 '+devD.cnt+'명</span></div>';
+  return head+'<div style="transform:scale(0.6);transform-origin:top left;width:167%;overflow:visible;">'+devD.html+'</div>';
+}
+
+/* ─ 5. 트레이딩 상세 ─ */
+function buildTrdDetail(d){
+  var trdD=Object.values(d.detail_data).find(function(v){return v.dept==='트레이딩';});
+  if(!trdD)return '';
+  var head='<div style="background:#FEF3C7;border:1pt solid #FBBF24;border-radius:3pt;padding:2pt 6pt;margin-bottom:3pt;display:flex;justify-content:space-between;">'
+    +'<span style="font-size:7pt;font-weight:700;color:#78350F;">트레이딩</span>'
+    +'<span style="font-size:6pt;color:#78350F;">재직 '+trdD.cnt+'명</span></div>';
+  return head+'<div style="transform:scale(0.48);transform-origin:top left;width:208%;overflow:visible;">'+trdD.html+'</div>';
+}
+
+/* ─ 6. HC 변동현황 ─ */
+function buildHCPrint(){
+  var org='합계';
+  var recent6=getIdxs('6');
+  var latestIdx=recent6[recent6.length-1];
+  var latestM=HC_DATA.months[latestIdx];
+  var latestV=HC_DATA.data[org][latestIdx]!=null?HC_DATA.data[org][latestIdx]:null;
+  var prev1Idx=recent6[recent6.length-2];
+  var prev1V=HC_DATA.data[org][prev1Idx]!=null?HC_DATA.data[org][prev1Idx]:null;
+  var prevYIdx=latestIdx-12;
+  var prevYV=prevYIdx>=0&&HC_DATA.data[org][prevYIdx]!=null?HC_DATA.data[org][prevYIdx]:null;
+  var mom=(latestV!=null&&prev1V!=null)?latestV-prev1V:null;
+  var yoy=(latestV!=null&&prevYV!=null)?latestV-prevYV:null;
+  var momP=(mom!=null&&prev1V>0)?(mom/prev1V*100).toFixed(1):null;
+  var yoyP=(yoy!=null&&prevYV>0)?(yoy/prevYV*100).toFixed(1):null;
+  var allV=getIdxs('all').map(function(i){return HC_DATA.data[org][i];}).filter(function(v){return v!=null;});
+  var maxV=allV.length?Math.max.apply(null,allV):0;
+  var minV=allV.length?Math.min.apply(null,allV):0;
+
+  function ds(d,p){if(d===null)return '';var s=d>0?'+':'';var c=d>0?'#16A34A':d<0?'#DC2626':'#888';return '<span style="color:'+c+';font-size:6pt;">'+s+d+'명'+(p?' ('+s+p+'%)':'')+'</span>';}
+
+  /* 요약 카드 */
+  var sumH='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2mm;margin-bottom:2mm;">'
+    +'<div style="background:#fff;border:0.5pt solid #E5E3DE;border-radius:3pt;padding:2mm 3mm;">'
+    +'<div style="font-size:5.5pt;color:#888;margin-bottom:1mm;">최신 인원 ('+latestM+')</div>'
+    +'<div style="font-size:13pt;font-weight:700;color:#111;">'+(latestV!=null?latestV:'-')+'명</div></div>'
+    +'<div style="background:#fff;border:0.5pt solid #E5E3DE;border-radius:3pt;padding:2mm 3mm;">'
+    +'<div style="font-size:5.5pt;color:#888;">전월 대비</div>'
+    +'<div style="font-size:11pt;font-weight:700;">'+(mom!=null?(mom>=0?'+':'')+mom+'명':'-')+'</div>'+ds(mom,momP)+'</div>'
+    +'<div style="background:#fff;border:0.5pt solid #E5E3DE;border-radius:3pt;padding:2mm 3mm;">'
+    +'<div style="font-size:5.5pt;color:#888;">전년 동월 대비</div>'
+    +'<div style="font-size:11pt;font-weight:700;">'+(yoy!=null?(yoy>=0?'+':'')+yoy+'명':'-')+'</div>'+ds(yoy,yoyP)+'</div>'
+    +'<div style="background:#fff;border:0.5pt solid #E5E3DE;border-radius:3pt;padding:2mm 3mm;">'
+    +'<div style="font-size:5.5pt;color:#888;">최고 / 최저</div>'
+    +'<div style="font-size:9pt;font-weight:700;">'+maxV+' / '+minV+'명</div></div></div>';
+
+  /* SVG 차트: 1~12월 고정 X축 */
+  var SW2=530,SH=58,PAD2={left:28,right:8,top:10,bottom:14};
+  var cW2=SW2-PAD2.left-PAD2.right,cH2=SH-PAD2.top-PAD2.bottom;
+  var allIdxs=getIdxs('all');
+  var yMap={};
+  allIdxs.forEach(function(i){
+    var m=HC_DATA.months[i],y=m.slice(0,4),mo=parseInt(m.replace(/.*년 /,'').replace('월',''));
+    if(!yMap[y])yMap[y]={};
+    yMap[y][mo]=HC_DATA.data[org][i];
+  });
+  var sortedY=Object.keys(yMap).sort();
+  var thisY=latestM?latestM.slice(0,4):sortedY[sortedY.length-1];
+  var lastY=String(parseInt(thisY)-1);
+  var mos=[1,2,3,4,5,6,7,8,9,10,11,12];
+  var thisV=mos.map(function(mo){return yMap[thisY]&&yMap[thisY][mo]!=null?yMap[thisY][mo]:null;});
+  var lastV=mos.map(function(mo){return yMap[lastY]&&yMap[lastY][mo]!=null?yMap[lastY][mo]:null;});
+  var combined=thisV.concat(lastV).filter(function(v){return v!=null;});
+  var vMin2=combined.length?Math.max(0,Math.min.apply(null,combined)-10):0;
+  var vMax2=combined.length?Math.max.apply(null,combined)+10:400;
+  var vR2=vMax2-vMin2||1;
+  function toX2(i){return PAD2.left+(i/11)*cW2;}
+  function toY2(v){return PAD2.top+(1-(v-vMin2)/vR2)*cH2;}
+
+  var grid2='';
+  [0,1,2,3].forEach(function(s){
+    var v=vMin2+(vR2/3)*s,y=toY2(v);
+    grid2+='<line x1="'+PAD2.left+'" y1="'+y+'" x2="'+(SW2-PAD2.right)+'" y2="'+y+'" stroke="#F0EEE9" stroke-width="0.5"/>';
+    grid2+='<text x="'+(PAD2.left-2)+'" y="'+(y+1.5)+'" text-anchor="end" font-size="4.5" fill="#bbb">'+Math.round(v)+'</text>';
+  });
+  var xLbls='';
+  mos.forEach(function(mo,i){xLbls+='<text x="'+toX2(i)+'" y="'+(SH-1)+'" text-anchor="middle" font-size="4.5" fill="#888">'+mo+'월</text>';});
+  function mkPath2(vals,c,op,sw){var p='',st=false;vals.forEach(function(v,i){if(v==null){st=false;return;}if(!st){p='M'+toX2(i)+','+toY2(v);st=true;}else p+=' L'+toX2(i)+','+toY2(v);});return p?'<path d="'+p+'" fill="none" stroke="'+c+'" stroke-width="'+sw+'" stroke-opacity="'+op+'" stroke-linejoin="round"/>':'';}
+  function mkDots2(vals,c,op,r,yr){return vals.map(function(v,i){if(v==null)return '';var x=toX2(i),y=toY2(v);var mk=yr+'년 '+mos[i]+'월';var hm=HC_DATA.memos&&!!HC_DATA.memos[mk];return '<circle cx="'+x+'" cy="'+y+'" r="'+(hm?r+1.5:r)+'" fill="'+(hm?'#F59E0B':c)+'" fill-opacity="'+op+'" stroke="white" stroke-width="0.5"/>';}).join('');}
+  var area='';var st2=false,pts2=[];
+  thisV.forEach(function(v,i){if(v==null){st2=false;return;}pts2.push({x:toX2(i),y:toY2(v)});if(!st2){area='M'+toX2(i)+','+toY2(v);st2=true;}else area+=' L'+toX2(i)+','+toY2(v);});
+  if(pts2.length>1){var lp2=pts2[pts2.length-1],fp2=pts2[0];area+=' L'+lp2.x+','+(SH-PAD2.bottom)+' L'+fp2.x+','+(SH-PAD2.bottom)+' Z';}
+
+  var svgH='<div style="background:#fff;border:0.5pt solid #E5E3DE;border-radius:3pt;padding:2mm;margin-bottom:2mm;">'
+    +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1mm;">'
+    +'<span style="font-size:6pt;font-weight:600;color:#333;">합계 HC 추이 (1~12월)</span>'
+    +'<div style="display:flex;gap:4pt;font-size:5pt;color:#666;">'
+    +'<span><span style="width:10pt;height:1.5pt;background:#93C5FD;display:inline-block;vertical-align:middle;margin-right:1.5pt;"></span>'+lastY+'년</span>'
+    +'<span><span style="width:10pt;height:1.5pt;background:#2563EB;display:inline-block;vertical-align:middle;margin-right:1.5pt;"></span>'+thisY+'년</span>'
+    +'<span style="color:#F59E0B;">&#128204; 특이사항</span></div></div>'
+    +'<svg width="'+SW2+'" height="'+SH+'" viewBox="0 0 '+SW2+' '+SH+'" style="width:100%;height:auto;display:block;">'
+    +'<defs><linearGradient id="pg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2563EB" stop-opacity="0.1"/><stop offset="100%" stop-color="#2563EB" stop-opacity="0"/></linearGradient></defs>'
+    +grid2+(area?'<path d="'+area+'" fill="url(#pg2)"/>':'')
+    +mkPath2(lastV,'#93C5FD',0.65,1)+mkPath2(thisV,'#2563EB',1,1.5)
+    +mkDots2(lastV,'#93C5FD',0.65,1.5,lastY)+mkDots2(thisV,'#2563EB',1,2,thisY)
+    +xLbls+'</svg></div>';
+
+  /* 테이블: 전년 동월 + 최근 6개월, 00년 0월 형식, 우측에 전년/전월 변동 추가 */
+  var prevYMIdx=recent6[recent6.length-1]-12;
+  var showIdxs=prevYMIdx>=0?[prevYMIdx].concat(recent6):recent6.slice();
+  var secs=[
+    {label:'무신사 브랜드',key:'무신사 브랜드',color:'#1E40AF',light:'#EFF6FF',subs:['브랜드 Staff','오프라인세일즈','전략 & 데이터','무신사스탠다드','브랜드개발','트레이딩']},
+    {label:'무신사리테일서비스',key:'무신사리테일서비스',color:'#065F46',light:'#ECFDF5',subs:[]},
+    {label:'무신사파트너스',key:'무신사파트너스',color:'#78350F',light:'#FEF3C7',subs:[]},
+  ];
+  function fmtM(m){
+    /* "2026년 6월" → "26년 6월" */
+    return m.replace('20','').replace('년 ','년 ');
+  }
+  function dCell(c,p,isRef){
+    if(c==null)return '<td>-</td>';
+    var delta='';
+    if(!isRef&&p!=null){var dv=c-p;delta=dv>0?'<span style="color:#16A34A;font-size:4pt;">&#9650;'+dv+'</span>':dv<0?'<span style="color:#DC2626;font-size:4pt;">&#9660;'+Math.abs(dv)+'</span>':'';}
+    return '<td style="'+(isRef?'background:#FFFBEB;border-right:1pt solid #FDE68A;':'')+'">'+(c!=null?c:'-')+delta+'</td>';
+  }
+  function mkRow(key,showIdxs,style,label){
+    var cells=showIdxs.map(function(idx,ii){
+      var v=HC_DATA.data[key]!=null?HC_DATA.data[key][idx]:null;
+      var pv=ii>0?(HC_DATA.data[key]!=null?HC_DATA.data[key][showIdxs[ii-1]]:null):null;
+      return dCell(v,pv,ii===0);
+    }).join('');
+    /* 우측 추가 컬럼: 전년 대비, 전월 대비 */
+    var latV=HC_DATA.data[key]!=null?HC_DATA.data[key][showIdxs[showIdxs.length-1]]:null;
+    var prevMV=HC_DATA.data[key]!=null?HC_DATA.data[key][showIdxs[showIdxs.length-2]]:null;
+    var prevYV2=HC_DATA.data[key]!=null?HC_DATA.data[key][showIdxs[0]]:null;
+    function dv2(c,p){if(c==null||p==null)return '-';var d=c-p;return (d>0?'<span style="color:#16A34A;">+'+d+'</span>':d<0?'<span style="color:#DC2626;">'+d+'</span>':'0');}
+    return '<tr style="'+style+'"><td style="'+( style.includes('EFF')||style.includes('ECFD')||style.includes('FEF3')?' padding-left:3pt;font-weight:700;':' padding-left:10pt;color:#555;')+'">'+(label||key)+'</td>'+cells
+      +'<td style="background:#F0F7FF;font-weight:600;border-left:1pt solid #BFDBFE;">'+dv2(latV,prevYV2)+'</td>'
+      +'<td style="background:#F0F7FF;font-weight:600;">'+dv2(latV,prevMV)+'</td></tr>';
+  }
+  var thCols=showIdxs.map(function(idx,ii){
+    var m=HC_DATA.months[idx];
+    var isRef=ii===0;
+    return '<th style="'+(isRef?'background:#FEF3C7;color:#78350F;border-right:1pt solid #FBBF24;':'')+'">'+fmtM(m)+(isRef?'<br><span style="font-size:4pt;font-weight:400;">전년</span>':'')+'</th>';
+  }).join('');
+  var tb='<table class="phc-tbl" style="font-size:5pt;">'
+    +'<thead><tr style="background:#F8F7F4;"><th style="text-align:left;min-width:52pt;">조직</th>'+thCols
+    +'<th style="background:#EFF6FF;color:#1E40AF;border-left:1pt solid #BFDBFE;white-space:nowrap;">vs전년</th>'
+    +'<th style="background:#EFF6FF;color:#1E40AF;">vs전월</th></tr></thead><tbody>';
+  tb+=mkRow('합계',showIdxs,'background:#F0F0EE;font-weight:700;','합계');
+  secs.forEach(function(sec){
+    tb+=mkRow(sec.key,showIdxs,'background:'+sec.light+';',sec.label);
+    sec.subs.forEach(function(sub){
+      if(!showIdxs.some(function(idx){return HC_DATA.data[sub]!=null&&HC_DATA.data[sub][idx]!=null;}))return;
+      tb+=mkRow(sub,showIdxs,'','');
+    });
+  });
+  tb+='</tbody></table>';
+  var tblH='<div style="background:#fff;border:0.5pt solid #E5E3DE;border-radius:3pt;overflow:hidden;">'
+    +'<div style="background:#F3F2EE;padding:1.5mm 2mm;font-size:6pt;font-weight:600;color:#333;border-bottom:0.5pt solid #E5E3DE;">'
+    +'월별 상세 수치 <span style="font-size:5pt;color:#aaa;font-weight:400;">· 전년 동월 + 최근 6개월 · 우측: vs전년/전월</span></div>'
+    +'<div style="overflow:hidden;">'+tb+'</div></div>';
+  return sumH+svgH+tblH;
+}
+
+/* ─ 실행 ─ */
 function executePrint(){
   document.getElementById('print-panel').classList.remove('open');
   var d=ALL_DATA[curMonth];
-  var y=curMonth.slice(0,4), m=parseInt(curMonth.slice(4));
+  var y=curMonth.slice(0,4),m=parseInt(curMonth.slice(4));
   var dateStr=y+'년 '+m+'월 1일 기준';
   var chks={
     ovTree:document.getElementById('pchk-ov-tree').checked,
@@ -1119,44 +1135,28 @@ function executePrint(){
     trd:document.getElementById('pchk-trd').checked,
     hc:document.getElementById('pchk-hc').checked,
   };
-  var container=document.getElementById('print-container');
-  container.innerHTML='';
-
+  var ct=document.getElementById('print-container');
+  ct.innerHTML='';
   function page(title,content){
-    return '<div class="print-page">'
-      +'<div class="print-hd"><h2>'+title+'</h2><span>무신사 브랜드 조직도 · '+dateStr+'</span></div>'
-      +content+'</div>';
+    return '<div class="pp"><div class="phd"><h2>'+title+'</h2><span>무신사 브랜드 조직도 · '+dateStr+'</span></div>'+content+'</div>';
   }
-
   var pages='';
-  if(chks.ovTree) pages+=page('Overview - 전체 조직도', buildPrintTree(ALL_DATA,curMonth));
-  if(chks.ovChange){
-    var chgH=buildChangePrint(d);
-    var lvH=buildLeavePrint(d);
-    pages+=page('Overview - 변동현황 · 휴직자',
-      '<div style="display:flex;flex-direction:column;gap:3mm;">'+chgH
-      +'<div style="border-top:0.5pt solid #FDE68A;padding-top:2mm;">'
-      +'<div style="font-size:6.5pt;font-weight:600;color:#78350F;margin-bottom:1.5mm;">'
-      +'휴직자 현황 <span style="font-size:6pt;font-weight:400;background:#F59E0B;color:#fff;border-radius:2pt;padding:0 3pt;margin-left:2pt;">'+d.leave_count+'명</span></div>'
-      +lvH+'</div></div>');
-  }
-  if(chks.std) pages+=page('조직별 상세 - 무신사스탠다드', buildStdPrintDetail(ALL_DATA,curMonth));
-  if(chks.dev) pages+=page('조직별 상세 - 브랜드개발', buildDevPrintDetail(ALL_DATA,curMonth));
-  if(chks.trd) pages+=page('조직별 상세 - 트레이딩', buildTrdPrintDetail(ALL_DATA,curMonth));
-  if(chks.hc)  pages+=page('HC 변동현황 - 전체 조직 / 최근 12개월', buildHCPrint());
-
-  container.innerHTML=pages;
-  ['overview-view','detail-view','hc-view'].forEach(function(id){
-    var el=document.getElementById(id); if(el)el.style.display='none';
-  });
-  var vt=document.querySelector('.view-tabs'), lb=document.querySelector('.legend-bar');
-  if(vt)vt.style.display='none'; if(lb)lb.style.display='none';
-  container.style.display='block';
+  if(chks.ovTree)   pages+=page('Overview - 전체 조직도',buildOvTree(d));
+  if(chks.ovChange) pages+=page('Overview - 변동현황 · 휴직자',buildOvChange(d));
+  if(chks.std)      pages+=page('조직별 상세 - 무신사스탠다드',buildStdDetail(d));
+  if(chks.dev)      pages+=page('조직별 상세 - 브랜드개발',buildDevDetail(d));
+  if(chks.trd)      pages+=page('조직별 상세 - 트레이딩',buildTrdDetail(d));
+  if(chks.hc)       pages+=page('HC 변동현황',buildHCPrint());
+  ct.innerHTML=pages;
+  ['overview-view','detail-view','hc-view'].forEach(function(id){var el=document.getElementById(id);if(el)el.style.display='none';});
+  var vt=document.querySelector('.view-tabs'),lb=document.querySelector('.legend-bar');
+  if(vt)vt.style.display='none';if(lb)lb.style.display='none';
+  ct.style.display='block';
   setTimeout(function(){
     window.print();
     setTimeout(function(){
-      container.style.display='none'; container.innerHTML='';
-      if(vt)vt.style.display=''; if(lb)lb.style.display='';
+      ct.style.display='none';ct.innerHTML='';
+      if(vt)vt.style.display='';if(lb)lb.style.display='';
       switchView(curView,curDetailId);
     },600);
   },400);
@@ -1165,18 +1165,20 @@ function executePrint(){
 loadMonth('202606');
 </script>
 
+
+
 <div class="print-btn-wrap">
   <div class="print-panel" id="print-panel">
-    <div class="print-panel-title">🖨️ A5 인쇄 선택</div>
+    <div class="print-panel-title">&#128424; A5 인쇄 선택</div>
     <label class="print-item"><input type="checkbox" id="pchk-ov-tree" checked> Overview - 전체 조직도</label>
     <label class="print-item"><input type="checkbox" id="pchk-ov-change" checked> Overview - 변동현황+휴직자</label>
     <label class="print-item"><input type="checkbox" id="pchk-std" checked> 조직별 상세 - 무신사스탠다드</label>
     <label class="print-item"><input type="checkbox" id="pchk-dev" checked> 조직별 상세 - 브랜드개발</label>
     <label class="print-item"><input type="checkbox" id="pchk-trd" checked> 조직별 상세 - 트레이딩</label>
-    <label class="print-item"><input type="checkbox" id="pchk-hc" checked> HC 변동현황 - 전체/12개월</label>
+    <label class="print-item"><input type="checkbox" id="pchk-hc" checked> HC 변동현황</label>
     <button class="print-execute" onclick="executePrint()">인쇄하기</button>
   </div>
-  <button class="print-btn" onclick="togglePrintPanel()">🖨️ A5 인쇄버전</button>
+  <button class="print-btn" onclick="togglePrintPanel()">&#128424; A5 인쇄버전</button>
 </div>
 <div id="print-container"></div>
 
